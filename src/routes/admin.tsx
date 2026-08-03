@@ -71,9 +71,12 @@ const ghostButton =
 
 function AdminPage() {
   const status = useServerFn(adminStatus);
+  const [signedIn, setSignedIn] = useState(false);
   const { data, refetch, isLoading } = useQuery({
     queryKey: ["admin-status"],
     queryFn: () => status({}),
+    staleTime: 0,
+    gcTime: 0,
   });
 
   if (isLoading) {
@@ -83,9 +86,26 @@ function AdminPage() {
       </main>
     );
   }
-  if (data?.admin) return <AdminShell onSignedOut={() => void refetch()} />;
-  return <LoginCard onSignedIn={() => void refetch()} />;
+  if (signedIn || data?.admin) {
+    return (
+      <AdminShell
+        onSignedOut={() => {
+          setSignedIn(false);
+          void refetch();
+        }}
+      />
+    );
+  }
+  return (
+    <LoginCard
+      onSignedIn={() => {
+        setSignedIn(true);
+        void refetch();
+      }}
+    />
+  );
 }
+
 
 function LoginCard({ onSignedIn }: { onSignedIn: () => void }) {
   const login = useServerFn(adminLogin);

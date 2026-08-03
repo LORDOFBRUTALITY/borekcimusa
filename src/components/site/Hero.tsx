@@ -1,5 +1,5 @@
-import { Link } from "@tanstack/react-router";
 import { ChefHat, MessageCircle, Phone } from "lucide-react";
+
 import heroImage from "@/assets/hero-ocakbasi.jpg";
 import { Emblem } from "./Emblem";
 import { SITE, whatsappLink } from "@/lib/site";
@@ -79,13 +79,7 @@ export function Hero({ title, subtitle }: { title: string; subtitle: string }) {
           {SITE.district} · {SITE.phone}
         </p>
       </div>
-
-      <Link
-        to="/admin"
-        className="absolute top-4 right-4 z-20 rounded-full border border-gold/25 px-4 py-1.5 text-[0.68rem] tracking-[0.28em] text-muted-foreground uppercase transition-colors duration-500 hover:border-gold/60 hover:text-gold sm:top-6 sm:right-6"
-      >
-        Admin
-      </Link>
     </section>
+
   );
 }
