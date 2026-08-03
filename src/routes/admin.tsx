@@ -5,20 +5,21 @@ import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { ArrowLeft, Check, LogOut, Plus, Trash2, X } from "lucide-react";
 import {
-  adminDeleteCampaign,
-  adminDeleteGalleryImage,
-  adminDeleteMenuItem,
-  adminDeleteReview,
+  deleteCampaign as adminDeleteCampaign,
+  deleteGalleryImage as adminDeleteGalleryImage,
+  deleteMenuItem as adminDeleteMenuItem,
+  deleteReview as adminDeleteReview,
   adminLoadAll,
   adminLogin,
   adminLogout,
-  adminSaveCampaign,
-  adminSaveGalleryImage,
-  adminSaveMenuItem,
-  adminSaveSiteContent,
-  adminSetReviewApproval,
+  saveCampaign as adminSaveCampaign,
+  saveGalleryImage as adminSaveGalleryImage,
+  saveMenuItem as adminSaveMenuItem,
+  saveSiteContent as adminSaveSiteContent,
+  setReviewApproval as adminSetReviewApproval,
   adminStatus,
-} from "@/lib/admin-api";
+} from "@/lib/admin.functions";
+
 import { Emblem } from "@/components/site/Emblem";
 
 export const Route = createFileRoute("/admin")({
