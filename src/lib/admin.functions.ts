@@ -77,7 +77,7 @@ export const saveMenuItem = createServerFn({ method: "POST" })
         name: z.string().min(1).max(120),
         description: z.string().max(500).default(""),
         price: z.number().int().min(0).max(1000000),
-        image_url: z.string().max(500).nullable().optional(),
+        image_url: z.string().max(500).nullable().default(null),
         sort_order: z.number().int().min(0).max(9999).default(0),
         is_visible: z.boolean().default(true),
       })
