@@ -1,5 +1,5 @@
-import { Link } from "@tanstack/react-router";
 import { ChefHat, MessageCircle, Phone } from "lucide-react";
+
 import heroImage from "@/assets/hero-ocakbasi.jpg";
 import { Emblem } from "./Emblem";
 import { SITE, whatsappLink } from "@/lib/site";
