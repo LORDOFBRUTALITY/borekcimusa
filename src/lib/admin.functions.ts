@@ -1,29 +1,11 @@
 import { createServerFn } from "@tanstack/react-start";
-import { useSession } from "@tanstack/react-start/server";
 import { z } from "zod";
-
-type AdminSession = { admin?: boolean };
-
-const sessionConfig = () => ({
-  password: process.env["ADMIN_SESSION_SECRET"]!,
-  name: "cvu-admin",
-  maxAge: 60 * 60 * 12,
-  cookie: { httpOnly: true, secure: true, sameSite: "lax" as const, path: "/" },
-});
-
-const normalizeUser = (value: string) =>
-  value.trim().toLocaleUpperCase("tr-TR").replace(/İ/g, "I").replace(/I/g, "I");
-
-async function requireAdmin() {
-  const session = await useSession<AdminSession>(sessionConfig());
-  if (!session.data.admin) throw new Error("Yetkisiz istek. Lütfen tekrar giriş yapın.");
-  return session;
-}
-
-async function admin() {
-  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-  return supabaseAdmin;
-}
+import {
+  adminDb as admin,
+  getAdminSession,
+  normalizeUser,
+  requireAdmin,
+} from "./admin.server";
 
 export const adminLogin = createServerFn({ method: "POST" })
   .inputValidator((data: { username: string; password: string }) =>
@@ -33,21 +15,22 @@ export const adminLogin = createServerFn({ method: "POST" })
     const okUser = normalizeUser(data.username) === "VEYSIUSTA";
     const okPass = data.password.trim() === "2116";
     if (!okUser || !okPass) return { ok: false as const };
-    const session = await useSession<AdminSession>(sessionConfig());
+    const session = await getAdminSession();
     await session.update({ admin: true });
     return { ok: true as const };
   });
 
 export const adminLogout = createServerFn({ method: "POST" }).handler(async () => {
-  const session = await useSession<AdminSession>(sessionConfig());
+  const session = await getAdminSession();
   await session.clear();
   return { ok: true as const };
 });
 
 export const adminStatus = createServerFn({ method: "GET" }).handler(async () => {
-  const session = await useSession<AdminSession>(sessionConfig());
+  const session = await getAdminSession();
   return { admin: Boolean(session.data.admin) };
 });
+
 
 export const adminLoadAll = createServerFn({ method: "GET" }).handler(async () => {
   await requireAdmin();
