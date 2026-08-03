@@ -4,7 +4,9 @@ import {
   adminDb as admin,
   getAdminSession,
   normalizeUser,
+  removeMediaByUrl,
   requireAdmin,
+  uploadMediaFile,
 } from "./admin.server";
 
 export const adminLogin = createServerFn({ method: "POST" })
@@ -176,5 +178,67 @@ export const deleteCampaign = createServerFn({ method: "POST" })
     const db = await admin();
     const res = await db.from("campaigns").delete().eq("id", data.id);
     if (res.error) throw new Error(res.error.message);
+    return { ok: true as const };
+  });
+
+export const uploadMedia = createServerFn({ method: "POST" })
+  .inputValidator((data: unknown) =>
+    z
+      .object({
+        fileName: z.string().min(1).max(200),
+        contentType: z.string().min(3).max(60),
+        dataBase64: z.string().min(10),
+      })
+      .parse(data),
+  )
+  .handler(async ({ data }) => {
+    await requireAdmin();
+    return uploadMediaFile(data);
+  });
+
+export const updateGalleryImage = createServerFn({ method: "POST" })
+  .inputValidator((data: unknown) =>
+    z
+      .object({
+        id: z.string().uuid(),
+        caption: z.string().max(200).default(""),
+        sort_order: z.number().int().min(0).max(9999).default(0),
+      })
+      .parse(data),
+  )
+  .handler(async ({ data }) => {
+    await requireAdmin();
+    const db = await admin();
+    const { id, ...values } = data;
+    const res = await db.from("gallery_images").update(values).eq("id", id);
+    if (res.error) throw new Error(res.error.message);
+    return { ok: true as const };
+  });
+
+export const updateReview = createServerFn({ method: "POST" })
+  .inputValidator((data: unknown) =>
+    z
+      .object({
+        id: z.string().uuid(),
+        full_name: z.string().min(2).max(80),
+        comment: z.string().min(3).max(1000),
+        rating: z.number().int().min(1).max(5),
+      })
+      .parse(data),
+  )
+  .handler(async ({ data }) => {
+    await requireAdmin();
+    const db = await admin();
+    const { id, ...values } = data;
+    const res = await db.from("reviews").update(values).eq("id", id);
+    if (res.error) throw new Error(res.error.message);
+    return { ok: true as const };
+  });
+
+export const deleteMedia = createServerFn({ method: "POST" })
+  .inputValidator((data: { url: string }) => z.object({ url: z.string().max(500) }).parse(data))
+  .handler(async ({ data }) => {
+    await requireAdmin();
+    await removeMediaByUrl(data.url);
     return { ok: true as const };
   });
