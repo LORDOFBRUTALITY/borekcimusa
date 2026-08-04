@@ -310,6 +310,21 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
     return new Date(latest).toLocaleString("tr-TR", { dateStyle: "medium", timeStyle: "short" });
   }, [data, menu, reviews]);
 
+  if (error) {
+    return (
+      <main className="grid min-h-screen place-items-center px-6 text-center">
+        <div className="space-y-4">
+          <p className="text-sm text-muted-foreground">
+            Oturum doğrulanamadı. Lütfen tekrar giriş yapın.
+          </p>
+          <button type="button" className={buttonClass} onClick={onSignedOut}>
+            Giriş ekranına dön
+          </button>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background lg:grid lg:grid-cols-[250px_minmax(0,1fr)]">
       <aside className="border-b border-gold/15 bg-surface/70 backdrop-blur lg:sticky lg:top-0 lg:h-screen lg:border-r lg:border-b-0">
