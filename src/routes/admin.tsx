@@ -241,9 +241,10 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
   const upload = useServerFn(adminUploadMedia);
   const removeMedia = useServerFn(adminDeleteMedia);
 
-  const { data, refetch, isLoading } = useQuery({
+  const { data, refetch, isLoading, error } = useQuery({
     queryKey: ["admin-data"],
     queryFn: () => loadAll({}),
+    retry: false,
   });
 
   const [tab, setTab] = useState<Tab>("dashboard");
@@ -308,6 +309,21 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
     const latest = dates.sort().at(-1)!;
     return new Date(latest).toLocaleString("tr-TR", { dateStyle: "medium", timeStyle: "short" });
   }, [data, menu, reviews]);
+
+  if (error) {
+    return (
+      <main className="grid min-h-screen place-items-center px-6 text-center">
+        <div className="space-y-4">
+          <p className="text-sm text-muted-foreground">
+            Oturum doğrulanamadı. Lütfen tekrar giriş yapın.
+          </p>
+          <button type="button" className={buttonClass} onClick={onSignedOut}>
+            Giriş ekranına dön
+          </button>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background lg:grid lg:grid-cols-[250px_minmax(0,1fr)]">
