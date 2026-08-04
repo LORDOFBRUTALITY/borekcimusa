@@ -37,12 +37,13 @@ export const adminStatus = createServerFn({ method: "GET" }).handler(async () =>
 export const adminLoadAll = createServerFn({ method: "GET" }).handler(async () => {
   await requireAdmin();
   const db = await admin();
-  const [menu, gallery, reviews, content, campaigns] = await Promise.all([
+  const [menu, gallery, reviews, content, campaigns, ikramlar] = await Promise.all([
     db.from("menu_items").select("*").order("category").order("sort_order"),
     db.from("gallery_images").select("*").order("sort_order"),
     db.from("reviews").select("*").order("created_at", { ascending: false }),
     db.from("site_content").select("*"),
     db.from("campaigns").select("*").order("created_at", { ascending: false }),
+    db.from("ikramlar").select("*").order("sort_order"),
   ]);
   return {
     menu: menu.data ?? [],
@@ -50,8 +51,48 @@ export const adminLoadAll = createServerFn({ method: "GET" }).handler(async () =
     reviews: reviews.data ?? [],
     content: content.data ?? [],
     campaigns: campaigns.data ?? [],
+    ikramlar: (ikramlar.data ?? []) as {
+      id: string;
+      name: string;
+      image_url: string | null;
+      sort_order: number;
+      is_visible: boolean;
+    }[],
   };
 });
+
+export const saveIkram = createServerFn({ method: "POST" })
+  .inputValidator((data: unknown) =>
+    z
+      .object({
+        id: z.string().uuid().optional(),
+        name: z.string().min(1).max(80),
+        image_url: z.string().max(500).nullable().default(null),
+        sort_order: z.number().int().min(0).max(9999).default(0),
+        is_visible: z.boolean().default(true),
+      })
+      .parse(data),
+  )
+  .handler(async ({ data }) => {
+    await requireAdmin();
+    const db = await admin();
+    const { id, ...values } = data;
+    const res = id
+      ? await db.from("ikramlar").update(values).eq("id", id)
+      : await db.from("ikramlar").insert(values);
+    if (res.error) throw new Error(res.error.message);
+    return { ok: true as const };
+  });
+
+export const deleteIkram = createServerFn({ method: "POST" })
+  .inputValidator((data: { id: string }) => z.object({ id: z.string().uuid() }).parse(data))
+  .handler(async ({ data }) => {
+    await requireAdmin();
+    const db = await admin();
+    const res = await db.from("ikramlar").delete().eq("id", data.id);
+    if (res.error) throw new Error(res.error.message);
+    return { ok: true as const };
+  });
 
 export const saveMenuItem = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) =>
