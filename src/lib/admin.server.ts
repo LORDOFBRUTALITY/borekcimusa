@@ -1,20 +1,23 @@
-import { useSession } from "@tanstack/react-start/server";
+import { getRequestUrl, useSession } from "@tanstack/react-start/server";
 
 export type AdminSession = { admin?: boolean };
 
-export const sessionConfig = () => ({
-  password: process.env["ADMIN_SESSION_SECRET"]!,
-  name: "cvu-admin",
-  maxAge: 60 * 60 * 12,
-  cookie: {
-    httpOnly: true,
-    // Secure cookies are dropped on plain-http dev origins (localhost:8080),
-    // which would make every admin request look unauthenticated.
-    secure: process.env["NODE_ENV"] === "production",
-    sameSite: "lax" as const,
-    path: "/",
-  },
-});
+export const sessionConfig = () => {
+  const secure = getRequestUrl().protocol === "https:";
+  return {
+    password: process.env["ADMIN_SESSION_SECRET"]!,
+    name: "cvu-admin",
+    maxAge: 60 * 60 * 12,
+    cookie: {
+      httpOnly: true,
+      // Hosted previews run in a cross-site iframe and require None + Secure.
+      // Plain-http localhost must remain Lax and insecure.
+      secure,
+      sameSite: secure ? ("none" as const) : ("lax" as const),
+      path: "/",
+    },
+  };
+};
 
 export const normalizeUser = (value: string) =>
   value.trim().toLocaleUpperCase("tr-TR").replace(/İ/g, "I");
