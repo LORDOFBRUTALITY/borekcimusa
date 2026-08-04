@@ -8,10 +8,10 @@ export const sessionConfig = () => ({
   maxAge: 60 * 60 * 12,
   cookie: {
     httpOnly: true,
-    // Secure cookies are dropped on plain-http dev origins (localhost:8080),
-    // which would make every admin request look unauthenticated.
+    // The hosted preview runs inside a cross-site iframe. Its cookie must be
+    // SameSite=None + Secure there; localhost still needs an insecure Lax cookie.
     secure: process.env["NODE_ENV"] === "production",
-    sameSite: "lax" as const,
+    sameSite: process.env["NODE_ENV"] === "production" ? ("none" as const) : ("lax" as const),
     path: "/",
   },
 });
