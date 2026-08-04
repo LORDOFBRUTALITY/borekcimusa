@@ -1,0 +1,1 @@
+update public.site_content set value = 'Ciğerin Adresi' where key = 'hero_title';

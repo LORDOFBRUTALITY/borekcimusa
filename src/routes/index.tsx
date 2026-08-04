@@ -74,7 +74,7 @@ export const Route = createFileRoute("/")({
 });
 
 const FALLBACK = {
-  hero_title: "Ciğerin Gerçek Ustası",
+  hero_title: "Ciğerin Adresi",
   hero_subtitle: "1978'den Bugüne Lezzetin Adresi",
   about_text:
     "Ciğerci Veysi Usta, Bursa Yunuseli'nde ocağın başında geçen yılların birikimiyle hizmet veren bir aile işletmesidir.",
