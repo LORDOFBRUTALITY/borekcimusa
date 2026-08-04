@@ -198,11 +198,12 @@ const EMPTY_ITEM = {
   is_visible: true,
 };
 
-type Tab = "dashboard" | "menu" | "gallery" | "reviews" | "settings";
+type Tab = "dashboard" | "menu" | "ikramlar" | "gallery" | "reviews" | "settings";
 
 const NAV: { id: Tab; label: string; icon: typeof LayoutDashboard }[] = [
   { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
   { id: "menu", label: "Menü Yönetimi", icon: UtensilsCrossed },
+  { id: "ikramlar", label: "İkramlar", icon: Leaf },
   { id: "gallery", label: "Galeri", icon: Images },
   { id: "reviews", label: "Yorumlar", icon: MessageSquare },
   { id: "settings", label: "Site Ayarları", icon: Settings },
