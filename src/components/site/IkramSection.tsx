@@ -29,11 +29,7 @@ export function IkramSection() {
 
   return (
     <section id="ikramlar" className="relative px-5 py-24 sm:py-32">
-      <SectionHeading
-        eyebrow="İkramlarımız"
-        title="Siz Değerlisiniz"
-        description="Masalarımıza ücretsiz olarak sunulan ikramlarımız."
-      />
+      <SectionHeading eyebrow="İkramlarımız" title="Siz Değerlisiniz" />
       <ul className="mx-auto mt-14 grid max-w-5xl grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
         {items.map((item, index) => {
           const Icon = ICONS[item.name] ?? Leaf;
