@@ -40,7 +40,7 @@ export function Hero({ title, subtitle }: { title: string; subtitle: string }) {
         ))}
       </div>
 
-      <div className="relative z-10 flex min-h-[100svh] flex-col items-center justify-center px-5 py-24 text-center">
+      <div className="relative z-10 flex min-h-[100svh] flex-col items-center justify-center px-5 py-20 text-center">
         <Emblem />
         <h1 className="mt-10 font-display text-5xl leading-[1.05] font-semibold text-balance sm:text-7xl">
           <span className="text-gilded">{title}</span>
@@ -74,10 +74,6 @@ export function Hero({ title, subtitle }: { title: string; subtitle: string }) {
             <MessageCircle className="size-4" strokeWidth={1.6} /> WhatsApp Sipariş
           </a>
         </div>
-
-        <p className="mt-10 text-xs tracking-[0.3em] text-muted-foreground/80 uppercase">
-          {SITE.district} · {SITE.phone}
-        </p>
       </div>
     </section>
 

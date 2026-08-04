@@ -1,11 +1,15 @@
 import { Check } from "lucide-react";
 import { REASONS } from "@/lib/site";
-import { Reveal, SectionHeading } from "./Reveal";
+import { Reveal } from "./Reveal";
 
 export function ReasonsSection() {
   return (
     <section id="neden" className="relative px-5 py-24 sm:py-32">
-      <SectionHeading eyebrow="Neden Biz" title="Neden Ciğerci Veysi Usta?" />
+      <Reveal className="flex justify-center">
+        <h2 className="max-w-full rounded-2xl border border-gold/30 px-5 py-3 text-center font-display text-[clamp(1.05rem,4.6vw,2.5rem)] leading-tight font-semibold whitespace-nowrap">
+          <span className="text-gilded">Neden Ciğerci Veysi Usta?</span>
+        </h2>
+      </Reveal>
       <div className="mx-auto mt-14 grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {REASONS.map((reason, index) => (
           <Reveal key={reason.title} delay={index * 55}>
