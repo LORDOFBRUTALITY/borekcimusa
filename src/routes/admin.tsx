@@ -241,9 +241,10 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
   const upload = useServerFn(adminUploadMedia);
   const removeMedia = useServerFn(adminDeleteMedia);
 
-  const { data, refetch, isLoading } = useQuery({
+  const { data, refetch, isLoading, error } = useQuery({
     queryKey: ["admin-data"],
     queryFn: () => loadAll({}),
+    retry: false,
   });
 
   const [tab, setTab] = useState<Tab>("dashboard");
