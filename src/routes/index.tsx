@@ -14,7 +14,7 @@ import { SITE } from "@/lib/site";
 
 const TITLE = "Ciğerci Veysi Usta | Bursa Yunuseli Ocakbaşı & Ciğer";
 const DESCRIPTION =
-  "Bursa Yunuseli'nde ciğer, Adana, Urfa, kuzu pirzola ve dürüm. Günlük taze ürünler, usta ellerden ızgara, bol ikramlı sofralar. Sipariş: 0540 604 2121.";
+  "Bursa Yunuseli'nde ciğer, Adana, Urfa, kuzu pirzola ve dürüm. Günlük taze ürünler, usta ellerden ızgara, bol ikramlı sofralar. Sipariş: 0535 359 62 16.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,6 +25,8 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "restaurant.restaurant" },
       { property: "og:url", content: "/" },
+      { property: "og:image", content: "https://veysi-usta-legacy.lovable.app/logo.png" },
+      { name: "twitter:image", content: "https://veysi-usta-legacy.lovable.app/logo.png" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
@@ -40,7 +42,7 @@ export const Route = createFileRoute("/")({
           description: DESCRIPTION,
           servesCuisine: ["Turkish", "Kebab", "Ocakbaşı"],
           priceRange: "₺₺",
-          telephone: "+90 540 604 21 21",
+          telephone: "+90 535 359 62 16",
           address: {
             "@type": "PostalAddress",
             addressLocality: "Yunuseli, Osmangazi",
