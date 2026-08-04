@@ -21,6 +21,19 @@ export type Review = {
   created_at: string;
 };
 export type Campaign = { id: string; title: string; description: string };
+export type Ikram = { id: string; name: string; image_url: string | null; sort_order: number };
+
+export const ikramlarQuery = queryOptions({
+  queryKey: ["ikramlar"],
+  queryFn: async (): Promise<Ikram[]> => {
+    const { data, error } = await supabase
+      .from("ikramlar")
+      .select("id, name, image_url, sort_order")
+      .order("sort_order", { ascending: true });
+    if (error) throw error;
+    return (data ?? []) as Ikram[];
+  },
+});
 
 export const menuQuery = queryOptions({
   queryKey: ["menu"],
