@@ -2,7 +2,7 @@ import { ChefHat, MessageCircle, Phone } from "lucide-react";
 
 import heroImage from "@/assets/hero-ocakbasi.jpg";
 import { Emblem } from "./Emblem";
-import { SITE, whatsappLink } from "@/lib/site";
+import { whatsappLink } from "@/lib/site";
 
 const EMBERS = Array.from({ length: 14 }, (_, i) => ({
   left: `${(i * 7.3 + 5) % 96}%`,
