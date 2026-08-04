@@ -74,7 +74,6 @@ const ghostButton =
 
 function AdminPage() {
   const status = useServerFn(adminStatus);
-  const [signedIn, setSignedIn] = useState(false);
   const { data, refetch, isLoading } = useQuery({
     queryKey: ["admin-status"],
     queryFn: () => status({}),
@@ -89,11 +88,10 @@ function AdminPage() {
       </main>
     );
   }
-  if (signedIn || data?.admin) {
+  if (data?.admin) {
     return (
       <AdminShell
         onSignedOut={() => {
-          setSignedIn(false);
           void refetch();
         }}
       />
@@ -101,16 +99,16 @@ function AdminPage() {
   }
   return (
     <LoginCard
-      onSignedIn={() => {
-        setSignedIn(true);
-        void refetch();
+      onSignedIn={async () => {
+        const result = await refetch();
+        return Boolean(result.data?.admin);
       }}
     />
   );
 }
 
 
-function LoginCard({ onSignedIn }: { onSignedIn: () => void }) {
+function LoginCard({ onSignedIn }: { onSignedIn: () => Promise<boolean> }) {
   const login = useServerFn(adminLogin);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -118,11 +116,15 @@ function LoginCard({ onSignedIn }: { onSignedIn: () => void }) {
 
   const mutation = useMutation({
     mutationFn: () => login({ data: { username, password } }),
-    onSuccess: (result) => {
+    onSuccess: async (result) => {
       if (result.ok) {
         setError("");
-        toast.success("Hoş geldiniz usta.");
-        onSignedIn();
+        const sessionReady = await onSignedIn();
+        if (sessionReady) {
+          toast.success("Hoş geldiniz usta.");
+        } else {
+          setError("Oturum başlatılamadı. Lütfen tekrar deneyin.");
+        }
       } else {
         setError("Kullanıcı adı veya şifre hatalı.");
       }
