@@ -9,6 +9,7 @@ import {
   Clock,
   Images,
   LayoutDashboard,
+  Leaf,
   LogOut,
   Megaphone,
   MessageSquare,
@@ -24,6 +25,7 @@ import {
 import {
   deleteCampaign as adminDeleteCampaign,
   deleteGalleryImage as adminDeleteGalleryImage,
+  deleteIkram as adminDeleteIkram,
   deleteMedia as adminDeleteMedia,
   deleteMenuItem as adminDeleteMenuItem,
   deleteReview as adminDeleteReview,
@@ -32,6 +34,7 @@ import {
   adminLogout,
   saveCampaign as adminSaveCampaign,
   saveGalleryImage as adminSaveGalleryImage,
+  saveIkram as adminSaveIkram,
   saveMenuItem as adminSaveMenuItem,
   saveSiteContent as adminSaveSiteContent,
   setReviewApproval as adminSetReviewApproval,
@@ -198,11 +201,12 @@ const EMPTY_ITEM = {
   is_visible: true,
 };
 
-type Tab = "dashboard" | "menu" | "gallery" | "reviews" | "settings";
+type Tab = "dashboard" | "menu" | "ikramlar" | "gallery" | "reviews" | "settings";
 
 const NAV: { id: Tab; label: string; icon: typeof LayoutDashboard }[] = [
   { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
   { id: "menu", label: "Menü Yönetimi", icon: UtensilsCrossed },
+  { id: "ikramlar", label: "İkramlar", icon: Leaf },
   { id: "gallery", label: "Galeri", icon: Images },
   { id: "reviews", label: "Yorumlar", icon: MessageSquare },
   { id: "settings", label: "Site Ayarları", icon: Settings },
@@ -226,6 +230,8 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
   const addImage = useServerFn(adminSaveGalleryImage);
   const editImage = useServerFn(adminUpdateGalleryImage);
   const removeImage = useServerFn(adminDeleteGalleryImage);
+  const saveIkram = useServerFn(adminSaveIkram);
+  const removeIkram = useServerFn(adminDeleteIkram);
   const approve = useServerFn(adminSetReviewApproval);
   const editReview = useServerFn(adminUpdateReview);
   const removeReview = useServerFn(adminDeleteReview);
@@ -244,6 +250,7 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
   const [draft, setDraft] = useState<typeof EMPTY_ITEM & { id?: string }>({ ...EMPTY_ITEM });
   const [image, setImage] = useState({ image_url: "", caption: "", sort_order: 0 });
   const [campaign, setCampaign] = useState({ title: "", description: "" });
+  const [ikramDraft, setIkramDraft] = useState({ name: "", image_url: "" });
   const [content, setContent] = useState<Record<string, string>>({});
   const [reviewDraft, setReviewDraft] = useState<{
     id: string;
@@ -288,6 +295,7 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
   const gallery = data?.gallery ?? [];
   const reviews = data?.reviews ?? [];
   const campaigns = data?.campaigns ?? [];
+  const ikramlar = data?.ikramlar ?? [];
   const pending = reviews.filter((review) => !review.is_approved);
 
   const lastUpdated = useMemo(() => {
@@ -373,6 +381,7 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
             <StatCard icon={Clock} label="Son Güncelleme" value={lastUpdated} small />
             <StatCard icon={Images} label="Galeri Fotoğrafı" value={gallery.length} />
             <StatCard icon={Megaphone} label="Kampanya" value={campaigns.length} />
+            <StatCard icon={Leaf} label="İkram" value={ikramlar.length} />
           </section>
         ) : null}
 
@@ -568,6 +577,166 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
               ))}
               {menu.length === 0 ? (
                 <p className="text-sm text-muted-foreground">Henüz ürün yok.</p>
+              ) : null}
+            </div>
+          </section>
+        ) : null}
+
+        {tab === "ikramlar" ? (
+          <section className="mt-8 space-y-6">
+            <div className="grid gap-3 rounded-2xl border border-gold/15 bg-surface p-5 sm:grid-cols-[minmax(0,1fr)_auto_auto]">
+              <input
+                className={inputClass}
+                placeholder="İkram adı (örn. Haydari)"
+                value={ikramDraft.name}
+                onChange={(event) => setIkramDraft({ ...ikramDraft, name: event.target.value })}
+              />
+              <label className={`${ghostButton} cursor-pointer justify-center`}>
+                <UploadCloud className="size-4" />
+                {ikramDraft.image_url ? "Fotoğraf seçildi" : "Fotoğraf Yükle"}
+                <input
+                  type="file"
+                  accept="image/png,image/jpeg,image/webp"
+                  className="hidden"
+                  onChange={(event) => {
+                    const file = event.target.files?.[0];
+                    event.target.value = "";
+                    if (!file) return;
+                    void run(async () => {
+                      const url = await uploadFile(file);
+                      setIkramDraft((prev) => ({ ...prev, image_url: url }));
+                    }, "Fotoğraf yüklendi.");
+                  }}
+                />
+              </label>
+              <button
+                type="button"
+                disabled={busy || !ikramDraft.name.trim()}
+                className={buttonClass}
+                onClick={() =>
+                  void run(async () => {
+                    await saveIkram({
+                      data: {
+                        name: ikramDraft.name.trim(),
+                        image_url: ikramDraft.image_url || null,
+                        sort_order: ikramlar.length + 1,
+                        is_visible: true,
+                      },
+                    });
+                    setIkramDraft({ name: "", image_url: "" });
+                  }, "İkram eklendi.")
+                }
+              >
+                <Plus className="size-4" /> Ekle
+              </button>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+              {ikramlar.map((row) => (
+                <div
+                  key={row.id}
+                  className="overflow-hidden rounded-2xl border border-gold/15 bg-surface"
+                >
+                  {row.image_url ? (
+                    <img
+                      src={row.image_url}
+                      alt={row.name}
+                      loading="lazy"
+                      className="aspect-[4/3] w-full object-cover"
+                    />
+                  ) : null}
+                  <div className="space-y-2 p-3">
+                    <input
+                      className={inputClass}
+                      defaultValue={row.name}
+                      placeholder="İkram adı"
+                      onBlur={(event) =>
+                        event.target.value.trim() && event.target.value !== row.name
+                          ? void run(
+                              () =>
+                                saveIkram({
+                                  data: {
+                                    id: row.id,
+                                    name: event.target.value.trim(),
+                                    image_url: row.image_url,
+                                    sort_order: row.sort_order,
+                                    is_visible: row.is_visible,
+                                  },
+                                }),
+                              "İkram güncellendi.",
+                            )
+                          : undefined
+                      }
+                    />
+                    <input
+                      className={inputClass}
+                      type="number"
+                      defaultValue={row.sort_order}
+                      placeholder="Sıra"
+                      onBlur={(event) =>
+                        Number(event.target.value) !== row.sort_order
+                          ? void run(
+                              () =>
+                                saveIkram({
+                                  data: {
+                                    id: row.id,
+                                    name: row.name,
+                                    image_url: row.image_url,
+                                    sort_order: Number(event.target.value),
+                                    is_visible: row.is_visible,
+                                  },
+                                }),
+                              "Sıra güncellendi.",
+                            )
+                          : undefined
+                      }
+                    />
+                    <div className="grid grid-cols-2 gap-2">
+                      <label className={`${ghostButton} cursor-pointer justify-center`}>
+                        <UploadCloud className="size-4" /> Fotoğraf
+                        <input
+                          type="file"
+                          accept="image/png,image/jpeg,image/webp"
+                          className="hidden"
+                          onChange={(event) => {
+                            const file = event.target.files?.[0];
+                            event.target.value = "";
+                            if (!file) return;
+                            void run(async () => {
+                              const url = await uploadFile(file);
+                              if (row.image_url) await removeMedia({ data: { url: row.image_url } });
+                              await saveIkram({
+                                data: {
+                                  id: row.id,
+                                  name: row.name,
+                                  image_url: url,
+                                  sort_order: row.sort_order,
+                                  is_visible: row.is_visible,
+                                },
+                              });
+                            }, "Fotoğraf güncellendi.");
+                          }}
+                        />
+                      </label>
+                      <button
+                        type="button"
+                        disabled={busy}
+                        className={`${ghostButton} justify-center`}
+                        onClick={() =>
+                          void run(async () => {
+                            await removeIkram({ data: { id: row.id } });
+                            if (row.image_url) await removeMedia({ data: { url: row.image_url } });
+                          }, "İkram silindi.")
+                        }
+                      >
+                        <Trash2 className="size-4 text-destructive" /> Sil
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+              {ikramlar.length === 0 ? (
+                <p className="text-sm text-muted-foreground">Henüz ikram yok.</p>
               ) : null}
             </div>
           </section>
