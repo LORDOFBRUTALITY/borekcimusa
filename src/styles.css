@@ -120,6 +120,10 @@
 
   body {
     background-color: var(--color-background);
+    background-image: var(--gradient-page);
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
