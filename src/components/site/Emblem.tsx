@@ -16,7 +16,7 @@ export function Emblem({ className, compact = false }: { className?: string; com
       />
       {!compact ? (
         <p className="mt-4 text-[0.62rem] tracking-[0.5em] text-muted-foreground uppercase">
-          Ocakbaşı · Bursa
+          Bursa
         </p>
       ) : null}
     </div>

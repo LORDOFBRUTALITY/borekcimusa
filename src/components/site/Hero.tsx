@@ -1,6 +1,6 @@
 import { ChefHat, MessageCircle, Phone } from "lucide-react";
 
-import heroImage from "@/assets/hero-ocakbasi.jpg";
+import heroAsset from "@/assets/hero-sofra.jpg.asset.json";
 import { Emblem } from "./Emblem";
 import { whatsappLink } from "@/lib/site";
 
@@ -14,12 +14,12 @@ export function Hero({ title, subtitle }: { title: string; subtitle: string }) {
   return (
     <section id="hero" className="relative isolate min-h-[100svh] overflow-hidden">
       <img
-        src={heroImage}
-        alt="Ocakbaşında közlenen ciğer ve kebap şişleri"
-        width={1920}
-        height={1280}
+        src={heroAsset.url}
+        alt="Ciğer şiş, ikramlar ve mezelerle donatılmış ocakbaşı sofrası"
+        width={1280}
+        height={1920}
         fetchPriority="high"
-        className="ken-burns absolute inset-0 size-full object-cover"
+        className="ken-burns absolute inset-0 size-full object-cover object-center"
       />
       <div
         className="absolute inset-0"
