@@ -117,18 +117,21 @@
 
   html {
     scroll-behavior: smooth;
+    background-color: var(--color-background);
   }
 
   body {
     background-color: var(--color-background);
     background-image: var(--gradient-page);
-    background-attachment: fixed;
+    background-attachment: scroll;
     background-size: 100% 100%;
     background-repeat: no-repeat;
+    min-height: 100svh;
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
+
 
   h1,
   h2,
