@@ -48,7 +48,7 @@
 :root {
   --radius: 0.5rem;
 
-  --background: oklch(0.21 0.012 30);
+  --background: oklch(0.235 0.015 28);
   --foreground: oklch(0.95 0.008 80);
   --surface: oklch(0.25 0.016 25);
   --surface-2: oklch(0.29 0.022 25);
@@ -94,12 +94,12 @@
     to bottom,
     oklch(0.14 0.01 30 / 25%),
     oklch(0.16 0.012 30 / 55%) 55%,
-    oklch(0.19 0.013 28 / 88%) 88%,
-    oklch(0.2 0.013 28 / 96%) 100%
+    oklch(0.22 0.014 28 / 80%) 88%,
+    oklch(0.235 0.015 28 / 92%) 100%
   );
   --gradient-page: linear-gradient(
     to bottom,
-    oklch(0.235 0.017 28) 0%,
+    oklch(0.235 0.015 28) 0%,
     oklch(0.225 0.016 27) 35%,
     oklch(0.212 0.014 26) 70%,
     oklch(0.205 0.013 28) 100%
