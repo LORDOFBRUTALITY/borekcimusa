@@ -12,7 +12,7 @@ const EMBERS = Array.from({ length: 14 }, (_, i) => ({
 
 export function Hero({ title, subtitle }: { title: string; subtitle: string }) {
   return (
-    <section id="hero" className="relative isolate min-h-[100svh] overflow-hidden">
+    <section id="hero" className="relative isolate min-h-[100svh]">
       <img
         src={heroAsset.url}
         alt="Ciğer şiş, ikramlar ve mezelerle donatılmış ocakbaşı sofrası"
@@ -36,6 +36,7 @@ export function Hero({ title, subtitle }: { title: string; subtitle: string }) {
         className="smoke-veil absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-background via-background/35 to-transparent"
         aria-hidden="true"
       />
+      <div className="hero-join" aria-hidden="true" />
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
         {EMBERS.map((e, i) => (
           <span
@@ -46,7 +47,7 @@ export function Hero({ title, subtitle }: { title: string; subtitle: string }) {
         ))}
       </div>
 
-      <div className="relative z-10 flex min-h-[100svh] flex-col items-center justify-center px-5 py-20 text-center">
+      <div className="relative z-10 flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-5 py-20 text-center">
         <Emblem />
         <h1 className="mt-10 font-display text-5xl leading-[1.05] font-semibold text-balance sm:text-7xl">
           <span className="text-gilded">{title}</span>
