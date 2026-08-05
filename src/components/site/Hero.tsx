@@ -20,6 +20,12 @@ export function Hero({ title, subtitle }: { title: string; subtitle: string }) {
         height={1920}
         fetchPriority="high"
         className="ken-burns absolute inset-0 size-full object-cover object-center"
+        style={{
+          maskImage:
+            "linear-gradient(to bottom, oklch(0 0 0) 0%, oklch(0 0 0) 45%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, oklch(0 0 0) 0%, oklch(0 0 0) 45%, transparent 100%)",
+        }}
       />
       <div
         className="absolute inset-0"
@@ -27,7 +33,7 @@ export function Hero({ title, subtitle }: { title: string; subtitle: string }) {
         aria-hidden="true"
       />
       <div
-        className="smoke-veil absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-background via-transparent to-transparent"
+        className="smoke-veil absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-background via-background/35 to-transparent"
         aria-hidden="true"
       />
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">

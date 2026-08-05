@@ -92,10 +92,11 @@
   --gradient-bordo: linear-gradient(160deg, oklch(0.31 0.105 21), oklch(0.18 0.05 25));
   --gradient-veil: linear-gradient(
     to bottom,
-    oklch(0.14 0.01 30 / 25%),
-    oklch(0.16 0.012 30 / 55%) 55%,
-    oklch(0.22 0.014 28 / 80%) 88%,
-    oklch(0.235 0.015 28 / 92%) 100%
+    oklch(0.14 0.01 30 / 22%) 0%,
+    oklch(0.16 0.012 30 / 45%) 40%,
+    oklch(0.2 0.013 28 / 72%) 70%,
+    oklch(0.235 0.015 28 / 94%) 90%,
+    oklch(0.235 0.015 28) 100%
   );
   --gradient-page: linear-gradient(
     to bottom,
