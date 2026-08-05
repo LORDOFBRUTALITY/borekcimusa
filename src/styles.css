@@ -101,8 +101,9 @@
   --gradient-page: linear-gradient(
     to bottom,
     oklch(0.235 0.015 28) 0%,
-    oklch(0.225 0.016 27) 35%,
-    oklch(0.212 0.014 26) 70%,
+    oklch(0.235 0.015 28) 16%,
+    oklch(0.225 0.016 27) 42%,
+    oklch(0.212 0.014 26) 72%,
     oklch(0.205 0.013 28) 100%
   );
 
@@ -243,6 +244,24 @@
 
 @utility smoke-veil {
   animation: smoke-drift 16s ease-in-out infinite;
+}
+
+@utility hero-join {
+  position: absolute;
+  z-index: 5;
+  right: 0;
+  bottom: -9rem;
+  left: 0;
+  height: 18rem;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    oklch(0.235 0.015 28 / 72%) 24%,
+    oklch(0.235 0.015 28) 50%,
+    oklch(0.235 0.015 28 / 72%) 76%,
+    transparent 100%
+  );
 }
 
 @utility ken-burns {
