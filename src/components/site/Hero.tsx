@@ -22,9 +22,9 @@ export function Hero({ title, subtitle }: { title: string; subtitle: string }) {
         className="ken-burns absolute inset-0 size-full object-cover object-center"
         style={{
           maskImage:
-            "linear-gradient(to bottom, oklch(0 0 0) 0%, oklch(0 0 0) 32%, oklch(0 0 0 / 0.75) 55%, oklch(0 0 0 / 0.35) 78%, transparent 100%)",
+            "linear-gradient(to bottom, oklch(0 0 0) 0%, oklch(0 0 0) 46%, oklch(0 0 0 / 0.82) 64%, oklch(0 0 0 / 0.45) 82%, oklch(0 0 0 / 0.12) 94%, transparent 100%)",
           WebkitMaskImage:
-            "linear-gradient(to bottom, oklch(0 0 0) 0%, oklch(0 0 0) 32%, oklch(0 0 0 / 0.75) 55%, oklch(0 0 0 / 0.35) 78%, transparent 100%)",
+            "linear-gradient(to bottom, oklch(0 0 0) 0%, oklch(0 0 0) 46%, oklch(0 0 0 / 0.82) 64%, oklch(0 0 0 / 0.45) 82%, oklch(0 0 0 / 0.12) 94%, transparent 100%)",
         }}
       />
       <div
