@@ -22,9 +22,9 @@ export function Hero({ title, subtitle }: { title: string; subtitle: string }) {
         className="ken-burns absolute inset-0 size-full object-cover object-center"
         style={{
           maskImage:
-            "linear-gradient(to bottom, oklch(0 0 0) 0%, oklch(0 0 0) 45%, transparent 100%)",
+            "linear-gradient(to bottom, oklch(0 0 0) 0%, oklch(0 0 0) 32%, oklch(0 0 0 / 0.75) 55%, oklch(0 0 0 / 0.35) 78%, transparent 100%)",
           WebkitMaskImage:
-            "linear-gradient(to bottom, oklch(0 0 0) 0%, oklch(0 0 0) 45%, transparent 100%)",
+            "linear-gradient(to bottom, oklch(0 0 0) 0%, oklch(0 0 0) 32%, oklch(0 0 0 / 0.75) 55%, oklch(0 0 0 / 0.35) 78%, transparent 100%)",
         }}
       />
       <div
@@ -50,10 +50,16 @@ export function Hero({ title, subtitle }: { title: string; subtitle: string }) {
 
       <div className="relative z-10 flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-5 py-20 text-center">
         <Emblem />
-        <h1 className="mt-10 font-display text-5xl leading-[1.05] font-semibold text-balance sm:text-7xl">
+        <h1
+          className="mt-10 font-display text-5xl leading-[1.05] font-semibold text-balance sm:text-7xl"
+          style={{ filter: "drop-shadow(0 3px 14px oklch(0.08 0.01 30 / 70%))" }}
+        >
           <span className="text-gilded">{title}</span>
         </h1>
-        <p className="mt-5 text-sm tracking-[0.32em] text-muted-foreground uppercase sm:text-base">
+        <p
+          className="mt-5 text-sm tracking-[0.32em] text-muted-foreground uppercase sm:text-base"
+          style={{ textShadow: "0 2px 10px oklch(0.08 0.01 30 / 70%)" }}
+        >
           {subtitle}
         </p>
         <div className="hairline-gold mt-8 h-px w-56" />

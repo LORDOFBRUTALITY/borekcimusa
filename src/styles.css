@@ -246,20 +246,44 @@
   animation: smoke-drift 16s ease-in-out infinite;
 }
 
+@utility hero-focus {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 70% 42% at 50% 38%,
+      oklch(0.1 0.012 30 / 55%) 0%,
+      oklch(0.1 0.012 30 / 32%) 45%,
+      transparent 78%
+    ),
+    linear-gradient(
+      to bottom,
+      oklch(0.1 0.012 30 / 26%) 0%,
+      transparent 34%,
+      transparent 66%,
+      oklch(0.1 0.012 30 / 20%) 100%
+    );
+}
+
 @utility hero-join {
   position: absolute;
   z-index: 5;
   right: 0;
-  bottom: -9rem;
+  bottom: -14rem;
   left: 0;
-  height: 18rem;
+  height: 30rem;
   pointer-events: none;
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    oklch(0.235 0.015 28 / 72%) 24%,
-    oklch(0.235 0.015 28) 50%,
-    oklch(0.235 0.015 28 / 72%) 76%,
+    oklch(0.235 0.015 28 / 18%) 18%,
+    oklch(0.235 0.015 28 / 52%) 34%,
+    oklch(0.235 0.015 28 / 82%) 48%,
+    oklch(0.235 0.015 28 / 82%) 58%,
+    oklch(0.235 0.015 28 / 46%) 74%,
+    oklch(0.235 0.015 28 / 14%) 88%,
     transparent 100%
   );
 }
