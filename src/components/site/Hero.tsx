@@ -36,6 +36,7 @@ export function Hero({ title, subtitle }: { title: string; subtitle: string }) {
         className="smoke-veil absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-background via-background/35 to-transparent"
         aria-hidden="true"
       />
+      <div className="hero-focus" aria-hidden="true" />
       <div className="hero-join" aria-hidden="true" />
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
         {EMBERS.map((e, i) => (
