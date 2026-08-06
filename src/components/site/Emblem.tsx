@@ -12,7 +12,11 @@ export function Emblem({ className, compact = false }: { className?: string; com
           "h-auto w-full max-w-full object-contain",
           compact ? "sm:max-w-[190px]" : "sm:max-w-[420px]",
         )}
-        style={{ maxWidth: compact ? "min(190px, 70vw)" : "min(420px, 85vw)" }}
+        style={{
+          maxWidth: compact ? "min(190px, 70vw)" : "min(420px, 85vw)",
+          filter:
+            "drop-shadow(0 2px 8px oklch(0.08 0.01 30 / 60%)) drop-shadow(0 10px 30px oklch(0.08 0.01 30 / 45%))",
+        }}
       />
       {!compact ? (
         <p className="mt-4 text-[0.62rem] tracking-[0.5em] text-muted-foreground uppercase">
