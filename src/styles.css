@@ -262,8 +262,8 @@
       to bottom,
       oklch(0.1 0.012 30 / 26%) 0%,
       transparent 34%,
-      transparent 66%,
-      oklch(0.1 0.012 30 / 20%) 100%
+      transparent 80%,
+      transparent 100%
     );
 }
 
@@ -271,22 +271,24 @@
   position: absolute;
   z-index: 5;
   right: 0;
-  bottom: -14rem;
+  bottom: -18rem;
   left: 0;
-  height: 30rem;
+  height: 38rem;
   pointer-events: none;
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    oklch(0.235 0.015 28 / 18%) 18%,
-    oklch(0.235 0.015 28 / 52%) 34%,
-    oklch(0.235 0.015 28 / 82%) 48%,
-    oklch(0.235 0.015 28 / 82%) 58%,
-    oklch(0.235 0.015 28 / 46%) 74%,
-    oklch(0.235 0.015 28 / 14%) 88%,
+    oklch(0.28 0.045 45 / 12%) 12%,
+    oklch(0.27 0.035 40 / 32%) 26%,
+    oklch(0.255 0.025 34 / 58%) 40%,
+    oklch(0.24 0.018 30 / 82%) 54%,
+    oklch(0.235 0.015 28 / 95%) 68%,
+    oklch(0.235 0.015 28 / 70%) 82%,
+    oklch(0.235 0.015 28 / 28%) 92%,
     transparent 100%
   );
 }
+
 
 @utility ken-burns {
   animation: slow-zoom 26s ease-out forwards;
