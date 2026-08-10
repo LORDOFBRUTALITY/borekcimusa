@@ -7,7 +7,7 @@ export function AboutSection({ about, history }: { about: string; history: strin
   const { data: campaigns = [] } = useQuery(campaignsQuery);
 
   return (
-    <section id="hakkimizda" className="relative px-5 py-24 sm:py-32">
+    <section id="hakkimizda" className="relative px-5 pt-16 pb-24 sm:pt-20 sm:pb-32">
       <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
         <Reveal>
           <div className="relative overflow-hidden rounded-3xl border border-gold/15">
