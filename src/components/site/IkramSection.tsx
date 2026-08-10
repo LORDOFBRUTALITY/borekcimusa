@@ -82,7 +82,7 @@ export function IkramSection() {
           src={ikramBg.url}
           alt=""
           loading="lazy"
-          className="size-full object-cover object-center opacity-55"
+          className="size-full object-cover object-center opacity-80"
           style={{
             maskImage:
               "linear-gradient(to bottom, transparent 0%, oklch(0 0 0 / 0.08) 7%, oklch(0 0 0 / 0.32) 16%, oklch(0 0 0 / 0.72) 28%, oklch(0 0 0) 42%, oklch(0 0 0) 65%, oklch(0 0 0 / 0.82) 75%, oklch(0 0 0 / 0.52) 84%, oklch(0 0 0 / 0.24) 92%, transparent 100%)",
@@ -94,7 +94,8 @@ export function IkramSection() {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to bottom, var(--background) 0%, color-mix(in oklab, var(--background) 82%, transparent) 12%, color-mix(in oklab, var(--background) 60%, transparent) 30%, color-mix(in oklab, var(--background) 52%, transparent) 58%, color-mix(in oklab, var(--background) 60%, transparent) 72%, color-mix(in oklab, var(--background) 74%, transparent) 84%, color-mix(in oklab, var(--background) 90%, transparent) 94%, var(--background) 100%)",
+              "linear-gradient(to bottom, var(--background) 0%, color-mix(in oklab, var(--background) 74%, transparent) 12%, color-mix(in oklab, var(--background) 38%, transparent) 30%, color-mix(in oklab, var(--background) 26%, transparent) 58%, color-mix(in oklab, var(--background) 40%, transparent) 72%, color-mix(in oklab, var(--background) 62%, transparent) 84%, color-mix(in oklab, var(--background) 86%, transparent) 94%, var(--background) 100%)",
+
           }}
         />
       </div>
