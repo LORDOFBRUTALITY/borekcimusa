@@ -56,7 +56,7 @@ export function IkramSection() {
           const Icon = ICONS[item.name] ?? Leaf;
           return (
             <Reveal key={item.id} delay={index * 55} as="li">
-              <div className="lift surface-glass group flex h-full flex-col items-center gap-3 overflow-hidden rounded-2xl text-center">
+              <div className="lift glass-ikram group flex h-full flex-col items-center gap-3 overflow-hidden rounded-2xl text-center">
                 {item.image_url ? (
                   <img
                     src={item.image_url}
