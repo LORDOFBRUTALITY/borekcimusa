@@ -29,8 +29,14 @@ export function IkramSection() {
   if (items.length === 0) return null;
 
   return (
-    <section id="ikramlar" className="relative isolate overflow-hidden px-5 py-32 sm:py-40">
-      <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+    <section
+      id="ikramlar"
+      className="relative isolate overflow-visible px-5 pt-32 pb-16 sm:pt-40 sm:pb-20"
+    >
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 -bottom-32 -z-10 overflow-hidden"
+        aria-hidden="true"
+      >
         <img
           src={ikramBg.url}
           alt=""
@@ -38,16 +44,16 @@ export function IkramSection() {
           className="size-full object-cover object-center opacity-45"
           style={{
             maskImage:
-              "linear-gradient(to bottom, transparent 0%, oklch(0 0 0 / 0.04) 8%, oklch(0 0 0 / 0.14) 16%, oklch(0 0 0 / 0.34) 25%, oklch(0 0 0 / 0.62) 34%, oklch(0 0 0 / 0.86) 43%, oklch(0 0 0) 50%, oklch(0 0 0 / 0.86) 58%, oklch(0 0 0 / 0.62) 67%, oklch(0 0 0 / 0.34) 76%, oklch(0 0 0 / 0.14) 85%, oklch(0 0 0 / 0.04) 93%, transparent 100%)",
+              "linear-gradient(to bottom, transparent 0%, oklch(0 0 0 / 0.08) 7%, oklch(0 0 0 / 0.32) 16%, oklch(0 0 0 / 0.72) 28%, oklch(0 0 0) 42%, oklch(0 0 0) 65%, oklch(0 0 0 / 0.82) 75%, oklch(0 0 0 / 0.52) 84%, oklch(0 0 0 / 0.24) 92%, transparent 100%)",
             WebkitMaskImage:
-              "linear-gradient(to bottom, transparent 0%, oklch(0 0 0 / 0.04) 8%, oklch(0 0 0 / 0.14) 16%, oklch(0 0 0 / 0.34) 25%, oklch(0 0 0 / 0.62) 34%, oklch(0 0 0 / 0.86) 43%, oklch(0 0 0) 50%, oklch(0 0 0 / 0.86) 58%, oklch(0 0 0 / 0.62) 67%, oklch(0 0 0 / 0.34) 76%, oklch(0 0 0 / 0.14) 85%, oklch(0 0 0 / 0.04) 93%, transparent 100%)",
+              "linear-gradient(to bottom, transparent 0%, oklch(0 0 0 / 0.08) 7%, oklch(0 0 0 / 0.32) 16%, oklch(0 0 0 / 0.72) 28%, oklch(0 0 0) 42%, oklch(0 0 0) 65%, oklch(0 0 0 / 0.82) 75%, oklch(0 0 0 / 0.52) 84%, oklch(0 0 0 / 0.24) 92%, transparent 100%)",
           }}
         />
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to bottom, var(--background) 0%, color-mix(in oklab, var(--background) 92%, transparent) 8%, color-mix(in oklab, var(--background) 84%, transparent) 16%, color-mix(in oklab, var(--background) 74%, transparent) 28%, color-mix(in oklab, var(--background) 66%, transparent) 42%, color-mix(in oklab, var(--background) 64%, transparent) 58%, color-mix(in oklab, var(--background) 72%, transparent) 72%, color-mix(in oklab, var(--background) 84%, transparent) 84%, color-mix(in oklab, var(--background) 93%, transparent) 92%, var(--background) 100%)",
+              "linear-gradient(to bottom, var(--background) 0%, color-mix(in oklab, var(--background) 88%, transparent) 12%, color-mix(in oklab, var(--background) 68%, transparent) 30%, color-mix(in oklab, var(--background) 60%, transparent) 58%, color-mix(in oklab, var(--background) 68%, transparent) 72%, color-mix(in oklab, var(--background) 80%, transparent) 84%, color-mix(in oklab, var(--background) 94%, transparent) 94%, var(--background) 100%)",
           }}
         />
       </div>
