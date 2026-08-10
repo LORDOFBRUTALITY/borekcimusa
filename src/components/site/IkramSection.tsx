@@ -29,7 +29,7 @@ export function IkramSection() {
   if (items.length === 0) return null;
 
   return (
-    <section id="ikramlar" className="relative isolate overflow-hidden px-5 py-24 sm:py-32">
+    <section id="ikramlar" className="relative isolate overflow-hidden px-5 py-32 sm:py-40">
       <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
         <img
           src={ikramBg.url}
@@ -38,17 +38,20 @@ export function IkramSection() {
           className="size-full object-cover object-center opacity-45"
           style={{
             maskImage:
-              "linear-gradient(to bottom, transparent 0%, oklch(0 0 0 / 0.55) 14%, oklch(0 0 0) 35%, oklch(0 0 0) 65%, oklch(0 0 0 / 0.55) 86%, transparent 100%)",
+              "linear-gradient(to bottom, transparent 0%, oklch(0 0 0 / 0.04) 8%, oklch(0 0 0 / 0.14) 16%, oklch(0 0 0 / 0.34) 25%, oklch(0 0 0 / 0.62) 34%, oklch(0 0 0 / 0.86) 43%, oklch(0 0 0) 50%, oklch(0 0 0 / 0.86) 58%, oklch(0 0 0 / 0.62) 67%, oklch(0 0 0 / 0.34) 76%, oklch(0 0 0 / 0.14) 85%, oklch(0 0 0 / 0.04) 93%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to bottom, transparent 0%, oklch(0 0 0 / 0.04) 8%, oklch(0 0 0 / 0.14) 16%, oklch(0 0 0 / 0.34) 25%, oklch(0 0 0 / 0.62) 34%, oklch(0 0 0 / 0.86) 43%, oklch(0 0 0) 50%, oklch(0 0 0 / 0.86) 58%, oklch(0 0 0 / 0.62) 67%, oklch(0 0 0 / 0.34) 76%, oklch(0 0 0 / 0.14) 85%, oklch(0 0 0 / 0.04) 93%, transparent 100%)",
           }}
         />
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to bottom, var(--background) 0%, color-mix(in oklab, var(--background) 74%, transparent) 22%, color-mix(in oklab, var(--background) 62%, transparent) 50%, color-mix(in oklab, var(--background) 76%, transparent) 78%, var(--background) 100%)",
+              "linear-gradient(to bottom, var(--background) 0%, color-mix(in oklab, var(--background) 92%, transparent) 8%, color-mix(in oklab, var(--background) 84%, transparent) 16%, color-mix(in oklab, var(--background) 74%, transparent) 28%, color-mix(in oklab, var(--background) 66%, transparent) 42%, color-mix(in oklab, var(--background) 64%, transparent) 58%, color-mix(in oklab, var(--background) 72%, transparent) 72%, color-mix(in oklab, var(--background) 84%, transparent) 84%, color-mix(in oklab, var(--background) 93%, transparent) 92%, var(--background) 100%)",
           }}
         />
       </div>
+
       <SectionHeading eyebrow="İkramlarımız" title="Siz Değerlisiniz" />
       <ul className="mx-auto mt-14 grid max-w-5xl grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
 
