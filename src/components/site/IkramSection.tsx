@@ -29,9 +29,29 @@ export function IkramSection() {
   if (items.length === 0) return null;
 
   return (
-    <section id="ikramlar" className="relative px-5 py-24 sm:py-32">
+    <section id="ikramlar" className="relative isolate overflow-hidden px-5 py-24 sm:py-32">
+      <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+        <img
+          src={ikramBg.url}
+          alt=""
+          loading="lazy"
+          className="size-full object-cover object-center opacity-45"
+          style={{
+            maskImage:
+              "linear-gradient(to bottom, transparent 0%, oklch(0 0 0 / 0.55) 14%, oklch(0 0 0) 35%, oklch(0 0 0) 65%, oklch(0 0 0 / 0.55) 86%, transparent 100%)",
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to bottom, var(--background) 0%, color-mix(in oklab, var(--background) 74%, transparent) 22%, color-mix(in oklab, var(--background) 62%, transparent) 50%, color-mix(in oklab, var(--background) 76%, transparent) 78%, var(--background) 100%)",
+          }}
+        />
+      </div>
       <SectionHeading eyebrow="İkramlarımız" title="Siz Değerlisiniz" />
       <ul className="mx-auto mt-14 grid max-w-5xl grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+
         {items.map((item, index) => {
           const Icon = ICONS[item.name] ?? Leaf;
           return (
