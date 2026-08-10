@@ -11,6 +11,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { ikramlarQuery } from "@/lib/public-data";
 import { Reveal, SectionHeading } from "./Reveal";
+import ikramBg from "@/assets/ikram-sofra.jpg.asset.json";
 
 const ICONS: Record<string, LucideIcon> = {
   Haydari: Soup,
