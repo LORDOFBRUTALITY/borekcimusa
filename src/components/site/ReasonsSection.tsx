@@ -7,7 +7,7 @@ export function ReasonsSection() {
     <section id="neden" className="relative px-4 py-24 sm:py-32">
       <Reveal className="text-center">
         <h2 className="mx-auto font-display text-[clamp(1.55rem,6.4vw,3rem)] leading-tight font-semibold tracking-tight whitespace-nowrap">
-          <span className="text-gilded">Neden Ciğerci Veysi Usta?</span>
+          <span className="text-gilded">Neden Börekçi Musa?</span>
         </h2>
         <div className="hairline-gold mx-auto mt-6 h-px w-40" />
       </Reveal>

@@ -1,26 +1,13 @@
-import {
-  Salad,
-  Soup,
-  Leaf,
-  Wheat,
-  CircleDot,
-  Flame,
-  Carrot,
-  type LucideIcon,
-} from "lucide-react";
+import { CupSoda, Coffee, Wheat, type LucideIcon } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { ikramlarQuery } from "@/lib/public-data";
 import { Reveal, SectionHeading } from "./Reveal";
-import ikramBg from "@/assets/ikram-sofra.jpg.asset.json";
+
+const ikramBg = { url: "/images/ikram-cay.jpg" };
 
 const ICONS: Record<string, LucideIcon> = {
-  Haydari: Soup,
-  Ezme: Salad,
-  "Mevsim Yeşilliği": Leaf,
-  "Bulgur Pilavı": Wheat,
-  Soğan: CircleDot,
-  "Kızarmış Soğan": Flame,
-  Salatalık: Carrot,
+  "Taze Demleme Çay": Coffee,
+  Ayran: CupSoda,
 };
 
 function FiligreeEdge({ position }: { position: "top" | "bottom" }) {

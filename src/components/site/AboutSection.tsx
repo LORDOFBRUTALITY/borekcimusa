@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { campaignsQuery } from "@/lib/public-data";
-import galleryImage from "@/assets/gallery-2.jpg";
+const galleryImage = "/images/urun-pastirmali.jpg";
 import { Reveal } from "./Reveal";
 
 export function AboutSection({ about, history }: { about: string; history: string }) {
@@ -13,7 +13,7 @@ export function AboutSection({ about, history }: { about: string; history: strin
           <div className="relative overflow-hidden rounded-3xl border border-gold/15">
             <img
               src={galleryImage}
-              alt="Ustanın elinden ciğer şiş"
+              alt="Fırından yeni çıkmış çıtır börek"
               loading="lazy"
               width={1024}
               height={1280}
@@ -29,7 +29,7 @@ export function AboutSection({ about, history }: { about: string; history: strin
               Hakkımızda
             </p>
             <h2 className="mt-4 font-display text-4xl font-semibold sm:text-5xl">
-              <span className="text-gilded">Ocağın Başındaki Aile</span>
+              <span className="text-gilded">Fırının Başındaki Usta</span>
             </h2>
             <p className="mt-6 leading-relaxed whitespace-pre-line text-muted-foreground">
               {about}

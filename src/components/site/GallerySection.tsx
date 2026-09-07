@@ -24,8 +24,8 @@ export function GallerySection() {
     <section id="galeri" className="relative px-5 py-24 sm:py-32">
       <SectionHeading
         eyebrow="Galeri"
-        title="Ateşin Kareleri"
-        description="Mekânımızdan ve ocağımızdan görüntüler."
+        title="@borekcimusa16 Instagram'da Biz"
+        description="Fırınımızdan en taze görseller ve günlük videolar için Instagram hesabımızı takip edin."
       />
 
       <div className="mx-auto mt-14 max-w-6xl columns-2 gap-4 md:columns-3 [&>*]:mb-4">
@@ -39,7 +39,7 @@ export function GallerySection() {
             >
               <img
                 src={image.image_url}
-                alt={image.caption || "Ciğerci Veysi Usta galeri görseli"}
+                alt={image.caption || "Börekçi Musa galeri görseli"}
                 loading="lazy"
                 className="w-full object-cover transition-transform duration-[1.1s] ease-[var(--ease-luxe)] group-hover:scale-110"
               />
