@@ -79,17 +79,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Ciğerci Veysi Usta | Bursa Yunuseli Ocakbaşı" },
+      { title: "Börekçi Musa | Nilüfer Bursa Sıcak Börek & Tahinli Pide" },
       {
         name: "description",
         content:
-          "Bursa Yunuseli'nde ciğer, Adana, Urfa ve ızgara çeşitleri. Günlük taze ürünler, usta ellerden ocakbaşı lezzeti.",
+          "Bursa Nilüfer'de her sabah taze, sıcak el açması börekler, tahinli pide ve su böreği. Paket servis: 0541 441 02 15.",
       },
-      { property: "og:site_name", content: "Ciğerci Veysi Usta" },
+      { property: "og:site_name", content: "Börekçi Musa" },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "tr_TR" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "theme-color", content: "#5A0F16" },
+      { name: "theme-color", content: "#3A2A18" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

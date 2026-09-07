@@ -12,9 +12,9 @@ import { WhatsAppFab } from "@/components/site/WhatsAppFab";
 import { contentQuery } from "@/lib/public-data";
 import { SITE } from "@/lib/site";
 
-const TITLE = "Ciğerci Veysi Usta | Bursa Yunuseli Ocakbaşı & Ciğer";
+const TITLE = "Börekçi Musa | Bursa Nilüfer Sıcak Börek & Tahinli Pide";
 const DESCRIPTION =
-  "Bursa Yunuseli'nde ciğer, Adana, Urfa, kuzu pirzola ve dürüm. Günlük taze ürünler, usta ellerden ızgara, bol ikramlı sofralar. Sipariş: 0535 359 62 16.";
+  "Bursa Nilüfer'de her sabah taze çıtır tepsi börekleri, pastırmalı kaşarlı börek, tahinli pide ve su böreği. Sipariş: 0541 441 02 15.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
