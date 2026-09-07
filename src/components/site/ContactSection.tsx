@@ -85,11 +85,12 @@ export function ContactSection() {
         <Reveal delay={120}>
           <div className="h-full min-h-[420px] overflow-hidden rounded-2xl border border-gold/15">
             <iframe
-              title="Ciğerci Veysi Usta konum haritası"
-              src={`https://www.google.com/maps?q=${encodeURIComponent(SITE.mapsQuery)}&output=embed`}
+              title="Börekçi Musa konum haritası"
+              src={SITE.mapsEmbed}
               loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="size-full min-h-[420px] border-0 grayscale-[0.35]"
+              allowFullScreen
+              referrerPolicy="strict-origin-when-cross-origin"
+              className="size-full min-h-[420px] border-0"
             />
           </div>
         </Reveal>

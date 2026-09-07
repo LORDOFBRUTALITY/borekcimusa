@@ -1,26 +1,13 @@
-import {
-  Salad,
-  Soup,
-  Leaf,
-  Wheat,
-  CircleDot,
-  Flame,
-  Carrot,
-  type LucideIcon,
-} from "lucide-react";
+import { CupSoda, Coffee, Wheat, type LucideIcon } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { ikramlarQuery } from "@/lib/public-data";
 import { Reveal, SectionHeading } from "./Reveal";
-import ikramBg from "@/assets/ikram-sofra.jpg.asset.json";
+
+const ikramBg = { url: "/images/ikram-cay.jpg" };
 
 const ICONS: Record<string, LucideIcon> = {
-  Haydari: Soup,
-  Ezme: Salad,
-  "Mevsim Yeşilliği": Leaf,
-  "Bulgur Pilavı": Wheat,
-  Soğan: CircleDot,
-  "Kızarmış Soğan": Flame,
-  Salatalık: Carrot,
+  "Taze Demleme Çay": Coffee,
+  Ayran: CupSoda,
 };
 
 function FiligreeEdge({ position }: { position: "top" | "bottom" }) {
@@ -100,11 +87,15 @@ export function IkramSection() {
         />
       </div>
 
-      <SectionHeading eyebrow="İkramlarımız" title="Siz Değerlisiniz" />
-      <ul className="mx-auto mt-14 grid max-w-5xl grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+      <SectionHeading
+        eyebrow="İkramlarımız"
+        title="Müessesemizin İkramı"
+        description="Börekçi Musa'da böreğinizin yanında dostluk ve samimiyet ikram edilir."
+      />
+      <ul className="mx-auto mt-14 grid max-w-md grid-cols-1 gap-4">
 
         {items.map((item, index) => {
-          const Icon = ICONS[item.name] ?? Leaf;
+          const Icon = ICONS[item.name] ?? Wheat;
           return (
             <Reveal key={item.id} delay={index * 55} as="li">
               <div className="lift glass-ikram group flex h-full flex-col items-center gap-3 overflow-hidden rounded-2xl text-center">

@@ -14,8 +14,8 @@ export const adminLogin = createServerFn({ method: "POST" })
     z.object({ username: z.string().max(80), password: z.string().max(80) }).parse(data),
   )
   .handler(async ({ data }) => {
-    const okUser = normalizeUser(data.username) === "VEYSIUSTA";
-    const okPass = data.password.trim() === "2116";
+    const okUser = normalizeUser(data.username) === "BOREKCIMUSA";
+    const okPass = data.password.trim() === "1616";
     if (!okUser || !okPass) return { ok: false as const };
     const session = await getAdminSession();
     await session.update({ admin: true });

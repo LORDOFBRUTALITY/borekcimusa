@@ -19,7 +19,7 @@ export function MenuSection() {
 
   return (
     <section id="menu" className="relative px-5 py-24 sm:py-32">
-      <SectionHeading eyebrow="Menü" title="Ocaktan Sofraya" />
+      <SectionHeading eyebrow="Menü" title="Fırından Sofranıza" />
 
       <div className="mx-auto mt-16 max-w-6xl space-y-20">
         {categories.map((category) => (

@@ -12,9 +12,9 @@ import { WhatsAppFab } from "@/components/site/WhatsAppFab";
 import { contentQuery } from "@/lib/public-data";
 import { SITE } from "@/lib/site";
 
-const TITLE = "Ciğerci Veysi Usta | Bursa Yunuseli Ocakbaşı & Ciğer";
+const TITLE = "Börekçi Musa | Bursa Nilüfer Sıcak Börek & Tahinli Pide";
 const DESCRIPTION =
-  "Bursa Yunuseli'nde ciğer, Adana, Urfa, kuzu pirzola ve dürüm. Günlük taze ürünler, usta ellerden ızgara, bol ikramlı sofralar. Sipariş: 0535 359 62 16.";
+  "Bursa Nilüfer'de her sabah taze çıtır tepsi börekleri, pastırmalı kaşarlı börek, tahinli pide ve su böreği. Sipariş: 0541 441 02 15.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,8 +25,8 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "restaurant.restaurant" },
       { property: "og:url", content: "/" },
-      { property: "og:image", content: "https://veysi-usta-legacy.lovable.app/logo.png" },
-      { name: "twitter:image", content: "https://veysi-usta-legacy.lovable.app/logo.png" },
+      { property: "og:image", content: "https://project--f6b67c71-a26a-455b-ac40-e95f499b66d5.lovable.app/logo.png" },
+      { name: "twitter:image", content: "https://project--f6b67c71-a26a-455b-ac40-e95f499b66d5.lovable.app/logo.png" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
@@ -37,15 +37,17 @@ export const Route = createFileRoute("/")({
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "Restaurant",
+          "@type": "Bakery",
           name: SITE.name,
           description: DESCRIPTION,
-          servesCuisine: ["Turkish", "Kebab", "Ocakbaşı"],
-          priceRange: "₺₺",
-          telephone: "+90 535 359 62 16",
+          servesCuisine: ["Turkish", "Börek", "Fırın"],
+          priceRange: "₺",
+          telephone: "+90 541 441 02 15",
           address: {
             "@type": "PostalAddress",
-            addressLocality: "Yunuseli, Osmangazi",
+            streetAddress: "Fethiye Mah. 1. Kelebek Sk. No:1/B",
+            addressLocality: "Nilüfer",
+            postalCode: "16461",
             addressRegion: "Bursa",
             addressCountry: "TR",
           },
@@ -62,8 +64,8 @@ export const Route = createFileRoute("/")({
                 "Saturday",
                 "Sunday",
               ],
-              opens: "11:00",
-              closes: "23:00",
+              opens: "06:00",
+              closes: "18:00",
             },
           ],
         }),
@@ -74,12 +76,12 @@ export const Route = createFileRoute("/")({
 });
 
 const FALLBACK = {
-  hero_title: "Ciğerin Adresi",
-  hero_subtitle: "1978'den Bugüne Lezzetin Adresi",
+  hero_title: "Çıtır Çıtır Sıcak Lezzet",
+  hero_subtitle: "Nilüfer'de Günün İlk Işıklarıyla Başlayan Geleneksel Fırın Lezzeti",
   about_text:
-    "Ciğerci Veysi Usta, Bursa Yunuseli'nde ocağın başında geçen yılların birikimiyle hizmet veren bir aile işletmesidir.",
+    "Börekçi Musa, Bursa Nilüfer'de her sabah erken saatlerde fırınını yakan, el açması börek geleneğini sürdüren bir aile işletmesidir.",
   history_text:
-    "İşletmemiz, ciğer ustalığını babadan oğula aktaran bir geleneğin devamı olarak kuruldu.",
+    "Musa ve Ahmet Ustaların elinden çıkan kat kat hamur, hakiki tereyağı ve taze malzemeyle her gün taptaze hazırlanır.",
 };
 
 function HomePage() {
