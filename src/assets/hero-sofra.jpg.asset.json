@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "cb557607-b644-4f48-9e73-cff96076f503",
-  "project_id": "13278917-a9e9-4e37-a8a4-fa2d9f9c5a4a",
-  "url": "/__l5e/assets-v1/cb557607-b644-4f48-9e73-cff96076f503/hero-sofra.jpg",
-  "r2_key": "a/v1/13278917-a9e9-4e37-a8a4-fa2d9f9c5a4a/cb557607-b644-4f48-9e73-cff96076f503/hero-sofra.jpg",
-  "original_filename": "hero-sofra.jpg",
-  "size": 688984,
   "content_type": "image/jpeg",
-  "created_at": "2026-08-05T21:33:52Z"
+  "created_at": "2026-08-05T21:33:52Z",
+  "original_filename": "hero-sofra.jpg",
+  "project_id": "f6b67c71-a26a-455b-ac40-e95f499b66d5",
+  "r2_key": "a/v1/f6b67c71-a26a-455b-ac40-e95f499b66d5/cb557607-b644-4f48-9e73-cff96076f503/hero-sofra.jpg",
+  "size": 688984,
+  "url": "/__l5e/assets-v1/cb557607-b644-4f48-9e73-cff96076f503/hero-sofra.jpg",
+  "version": 1
 }
