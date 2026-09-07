@@ -49,12 +49,12 @@ import { Emblem } from "@/components/site/Emblem";
 export const Route = createFileRoute("/admin")({
   head: () => ({
     meta: [
-      { title: "Yönetim Paneli | Ciğerci Veysi Usta" },
-      { name: "description", content: "Ciğerci Veysi Usta yönetim paneli girişi." },
+      { title: "Yönetim Paneli | Börekçi Musa" },
+      { name: "description", content: "Börekçi Musa yönetim paneli girişi." },
       { name: "robots", content: "noindex, nofollow, noarchive, nosnippet" },
       { name: "googlebot", content: "noindex, nofollow" },
-      { property: "og:title", content: "Yönetim Paneli | Ciğerci Veysi Usta" },
-      { property: "og:description", content: "Ciğerci Veysi Usta yönetim paneli girişi." },
+      { property: "og:title", content: "Yönetim Paneli | Börekçi Musa" },
+      { property: "og:description", content: "Börekçi Musa yönetim paneli girişi." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/admin" },
     ],
@@ -331,7 +331,7 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
     <div className="min-h-screen bg-background lg:grid lg:grid-cols-[250px_minmax(0,1fr)]">
       <aside className="border-b border-gold/15 bg-surface/70 backdrop-blur lg:sticky lg:top-0 lg:h-screen lg:border-r lg:border-b-0">
         <div className="px-5 py-6">
-          <p className="font-display text-lg font-semibold text-gilded">Veysi Usta</p>
+          <p className="font-display text-lg font-semibold text-gilded">Börekçi Musa</p>
           <p className="mt-1 text-[10px] tracking-[0.3em] text-muted-foreground uppercase">
             Yönetim Sistemi
           </p>
@@ -379,7 +379,7 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
               {NAV.find((item) => item.id === tab)?.label}
             </h1>
             <p className="mt-1 text-xs tracking-widest text-muted-foreground uppercase">
-              Ciğerci Veysi Usta
+              Börekçi Musa
             </p>
           </div>
           <Link to="/" className={ghostButton}>
