@@ -87,7 +87,11 @@ export function IkramSection() {
         />
       </div>
 
-      <SectionHeading eyebrow="İkramlarımız" title="Siz Değerlisiniz" />
+      <SectionHeading
+        eyebrow="İkramlarımız"
+        title="Müessesemizin İkramı"
+        description="Börekçi Musa'da böreğinizin yanında dostluk ve samimiyet ikram edilir."
+      />
       <ul className="mx-auto mt-14 grid max-w-md grid-cols-1 gap-4">
 
         {items.map((item, index) => {
