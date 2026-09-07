@@ -95,7 +95,7 @@ export function IkramSection() {
       <ul className="mx-auto mt-14 grid max-w-md grid-cols-1 gap-4">
 
         {items.map((item, index) => {
-          const Icon = ICONS[item.name] ?? Leaf;
+          const Icon = ICONS[item.name] ?? Wheat;
           return (
             <Reveal key={item.id} delay={index * 55} as="li">
               <div className="lift glass-ikram group flex h-full flex-col items-center gap-3 overflow-hidden rounded-2xl text-center">
