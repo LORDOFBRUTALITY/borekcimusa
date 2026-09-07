@@ -88,7 +88,7 @@ export function IkramSection() {
       </div>
 
       <SectionHeading eyebrow="İkramlarımız" title="Siz Değerlisiniz" />
-      <ul className="mx-auto mt-14 grid max-w-5xl grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+      <ul className="mx-auto mt-14 grid max-w-md grid-cols-1 gap-4">
 
         {items.map((item, index) => {
           const Icon = ICONS[item.name] ?? Leaf;
