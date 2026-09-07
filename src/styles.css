@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Ciğerci Veysi Usta — bordo / altın / bakır lüks tasarım sistemi.
+ * Börekçi Musa — ceviz ahşabı / altın başak / fırın karameli tasarım sistemi.
  * Tüm renkler oklch. Bileşenlerde asla ham renk sınıfı kullanılmaz.
  */
 
@@ -48,67 +48,67 @@
 :root {
   --radius: 0.5rem;
 
-  --background: oklch(0.235 0.015 28);
-  --foreground: oklch(0.95 0.008 80);
-  --surface: oklch(0.25 0.016 25);
-  --surface-2: oklch(0.29 0.022 25);
+  /* Börekçi Musa — sıcak ceviz ahşabı, altın başak ve fırın karameli */
+  --background: oklch(0.22 0.02 45);
+  --foreground: oklch(0.96 0.01 80);
+  --surface: oklch(0.255 0.024 45);
+  --surface-2: oklch(0.3 0.03 48);
 
-  --card: oklch(0.25 0.016 25);
-  --card-foreground: oklch(0.95 0.008 80);
-  --popover: oklch(0.25 0.016 25);
-  --popover-foreground: oklch(0.95 0.008 80);
+  --card: oklch(0.255 0.024 45);
+  --card-foreground: oklch(0.96 0.01 80);
+  --popover: oklch(0.255 0.024 45);
+  --popover-foreground: oklch(0.96 0.01 80);
 
-  /* Bordo #5A0F16 */
-  --primary: oklch(0.31 0.105 21);
+  --primary: oklch(0.3 0.04 50);
   --primary-foreground: oklch(0.96 0.02 85);
 
-  --secondary: oklch(0.25 0.03 30);
-  --secondary-foreground: oklch(0.95 0.008 80);
+  --secondary: oklch(0.27 0.03 50);
+  --secondary-foreground: oklch(0.96 0.01 80);
 
-  --muted: oklch(0.24 0.015 30);
-  --muted-foreground: oklch(0.72 0.02 70);
+  --muted: oklch(0.26 0.022 48);
+  --muted-foreground: oklch(0.78 0.08 75);
 
-  --accent: oklch(0.74 0.11 84);
-  --accent-foreground: oklch(0.18 0.02 30);
+  --accent: oklch(0.8 0.14 85);
+  --accent-foreground: oklch(0.2 0.03 45);
 
   --destructive: oklch(0.55 0.19 25);
   --destructive-foreground: oklch(0.97 0.01 80);
 
-  --border: oklch(0.35 0.03 45 / 45%);
-  --input: oklch(0.3 0.02 40);
-  --ring: oklch(0.74 0.11 84);
+  --border: oklch(0.4 0.05 60 / 45%);
+  --input: oklch(0.32 0.03 50);
+  --ring: oklch(0.8 0.14 85);
 
-  --gold: oklch(0.79 0.12 86);
-  --gold-soft: oklch(0.87 0.07 88);
-  --copper: oklch(0.63 0.11 52);
-  --ember: oklch(0.66 0.19 40);
+  --gold: oklch(0.8 0.14 85);
+  --gold-soft: oklch(0.88 0.09 88);
+  --copper: oklch(0.65 0.16 55);
+  --ember: oklch(0.65 0.16 55);
 
   --gradient-gold: linear-gradient(
     115deg,
-    oklch(0.68 0.09 70),
-    oklch(0.89 0.09 90),
-    oklch(0.66 0.1 55)
+    oklch(0.7 0.11 70),
+    oklch(0.9 0.1 90),
+    oklch(0.68 0.13 58)
   );
-  --gradient-bordo: linear-gradient(160deg, oklch(0.31 0.105 21), oklch(0.18 0.05 25));
+  --gradient-bordo: linear-gradient(160deg, oklch(0.3 0.04 50), oklch(0.18 0.02 45));
   --gradient-veil: linear-gradient(
     to bottom,
-    oklch(0.14 0.01 30 / 22%) 0%,
-    oklch(0.16 0.012 30 / 45%) 40%,
-    oklch(0.2 0.013 28 / 72%) 70%,
-    oklch(0.235 0.015 28 / 94%) 90%,
-    oklch(0.235 0.015 28) 100%
+    oklch(0.14 0.015 45 / 22%) 0%,
+    oklch(0.16 0.018 45 / 45%) 40%,
+    oklch(0.19 0.02 45 / 72%) 70%,
+    oklch(0.22 0.02 45 / 94%) 90%,
+    oklch(0.22 0.02 45) 100%
   );
   --gradient-page: linear-gradient(
     to bottom,
-    oklch(0.235 0.015 28) 0%,
-    oklch(0.235 0.015 28) 16%,
-    oklch(0.225 0.016 27) 42%,
-    oklch(0.212 0.014 26) 72%,
-    oklch(0.205 0.013 28) 100%
+    oklch(0.22 0.02 45) 0%,
+    oklch(0.22 0.02 45) 16%,
+    oklch(0.212 0.022 46) 42%,
+    oklch(0.2 0.02 46) 72%,
+    oklch(0.195 0.018 48) 100%
   );
 
-  --shadow-luxe: 0 30px 70px -30px oklch(0.05 0.02 30 / 85%);
-  --shadow-gold: 0 0 0 1px oklch(0.79 0.12 86 / 22%), 0 24px 60px -28px oklch(0.79 0.12 86 / 40%);
+  --shadow-luxe: 0 30px 70px -30px oklch(0.06 0.02 45 / 85%);
+  --shadow-gold: 0 0 0 1px oklch(0.8 0.14 85 / 22%), 0 24px 60px -28px oklch(0.8 0.14 85 / 40%);
   --ease-luxe: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -145,7 +145,7 @@
 
   ::selection {
     background: var(--gold);
-    color: oklch(0.18 0.02 30);
+    color: oklch(0.2 0.03 45);
   }
 }
 
@@ -254,13 +254,13 @@
   background:
     radial-gradient(
       ellipse 70% 42% at 50% 38%,
-      oklch(0.1 0.012 30 / 55%) 0%,
-      oklch(0.1 0.012 30 / 32%) 45%,
+      oklch(0.11 0.015 45 / 55%) 0%,
+      oklch(0.11 0.015 45 / 32%) 45%,
       transparent 78%
     ),
     linear-gradient(
       to bottom,
-      oklch(0.1 0.012 30 / 26%) 0%,
+      oklch(0.11 0.015 45 / 26%) 0%,
       transparent 34%,
       transparent 80%,
       transparent 100%
@@ -278,13 +278,13 @@
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    oklch(0.28 0.045 45 / 12%) 12%,
-    oklch(0.27 0.035 40 / 32%) 26%,
-    oklch(0.255 0.025 34 / 58%) 40%,
-    oklch(0.24 0.018 30 / 82%) 54%,
-    oklch(0.235 0.015 28 / 95%) 68%,
-    oklch(0.235 0.015 28 / 70%) 82%,
-    oklch(0.235 0.015 28 / 28%) 92%,
+    oklch(0.30 0.05 55 / 12%) 12%,
+    oklch(0.28 0.04 50 / 32%) 26%,
+    oklch(0.255 0.028 48 / 58%) 40%,
+    oklch(0.235 0.022 46 / 82%) 54%,
+    oklch(0.22 0.02 45 / 95%) 68%,
+    oklch(0.22 0.02 45 / 70%) 82%,
+    oklch(0.22 0.02 45 / 28%) 92%,
     transparent 100%
   );
 }
@@ -298,7 +298,7 @@
   background: color-mix(in oklab, var(--surface) 26%, transparent);
   backdrop-filter: blur(10px) saturate(135%);
   border: 1px solid color-mix(in oklab, var(--gold) 22%, transparent);
-  box-shadow: 0 18px 44px -28px oklch(0.05 0.02 30 / 70%);
+  box-shadow: 0 18px 44px -28px oklch(0.06 0.02 45 / 70%);
   &:hover {
     background: color-mix(in oklab, var(--surface) 38%, transparent);
   }
