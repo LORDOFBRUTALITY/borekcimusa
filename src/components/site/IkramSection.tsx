@@ -25,26 +25,32 @@ function FiligreeEdge({ position }: { position: "top" | "bottom" }) {
           position === "bottom" ? "rotate-180" : ""
         }`}
       >
+        {/* örgü börek kıvrımı — iki iç içe geçen dalga */}
         <path
-          d="M18 42C112 42 146 14 246 14C301 14 331 28 360 38C389 28 419 14 474 14C574 14 608 42 702 42"
+          d="M10 40C46 40 46 20 82 20C118 20 118 40 154 40C190 40 190 20 226 20C262 20 262 40 298 40C334 40 334 20 370 20C406 20 406 40 442 40C478 40 478 20 514 20C550 20 550 40 586 40C622 40 622 20 658 20C694 20 694 40 710 40"
           stroke="currentColor"
-          strokeWidth="2"
+          strokeWidth="1.6"
           strokeLinecap="round"
         />
         <path
-          d="M92 50C169 50 200 27 272 27C316 27 340 39 360 49C380 39 404 27 448 27C520 27 551 50 628 50"
+          d="M10 20C46 20 46 40 82 40C118 40 118 20 154 20C190 20 190 40 226 40C262 40 262 20 298 20C334 20 334 40 370 40C406 40 406 20 442 20C478 20 478 40 514 40C550 40 550 20 586 20C622 20 622 40 658 40C694 40 694 20 710 20"
           stroke="currentColor"
-          strokeWidth="1.15"
+          strokeWidth="1.1"
           strokeLinecap="round"
-          opacity="0.48"
+          opacity="0.5"
         />
-        <path
-          d="M334 31C342 20 351 14 360 8C369 14 378 20 386 31C376 28 367 28 360 38C353 28 344 28 334 31Z"
+        <rect
+          x="344"
+          y="14"
+          width="32"
+          height="32"
+          rx="4"
+          transform="rotate(45 360 30)"
           stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinejoin="round"
+          strokeWidth="1.4"
+          fill="var(--background)"
         />
-        <circle cx="360" cy="8" r="3.5" fill="currentColor" />
+        <circle cx="360" cy="30" r="3.2" fill="currentColor" />
       </svg>
     </div>
   );

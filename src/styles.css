@@ -46,69 +46,69 @@
 }
 
 :root {
-  --radius: 0.5rem;
+  --radius: 0.25rem;
 
-  /* Börekçi Musa — sıcak ceviz ahşabı, altın başak ve fırın karameli */
-  --background: oklch(0.22 0.02 45);
-  --foreground: oklch(0.96 0.01 80);
-  --surface: oklch(0.255 0.024 45);
-  --surface-2: oklch(0.3 0.03 48);
+  /* Börekçi Musa — koyu susam/zeytin kavı, bal amberi ve fırın kiremidi */
+  --background: oklch(0.19 0.017 82);
+  --foreground: oklch(0.95 0.015 92);
+  --surface: oklch(0.235 0.021 84);
+  --surface-2: oklch(0.285 0.028 86);
 
-  --card: oklch(0.255 0.024 45);
-  --card-foreground: oklch(0.96 0.01 80);
-  --popover: oklch(0.255 0.024 45);
-  --popover-foreground: oklch(0.96 0.01 80);
+  --card: oklch(0.235 0.021 84);
+  --card-foreground: oklch(0.95 0.015 92);
+  --popover: oklch(0.235 0.021 84);
+  --popover-foreground: oklch(0.95 0.015 92);
 
-  --primary: oklch(0.3 0.04 50);
-  --primary-foreground: oklch(0.96 0.02 85);
+  --primary: oklch(0.285 0.034 84);
+  --primary-foreground: oklch(0.96 0.02 92);
 
-  --secondary: oklch(0.27 0.03 50);
-  --secondary-foreground: oklch(0.96 0.01 80);
+  --secondary: oklch(0.255 0.026 84);
+  --secondary-foreground: oklch(0.95 0.015 92);
 
-  --muted: oklch(0.26 0.022 48);
-  --muted-foreground: oklch(0.78 0.08 75);
+  --muted: oklch(0.245 0.02 84);
+  --muted-foreground: oklch(0.79 0.06 92);
 
-  --accent: oklch(0.8 0.14 85);
-  --accent-foreground: oklch(0.2 0.03 45);
+  --accent: oklch(0.83 0.15 78);
+  --accent-foreground: oklch(0.19 0.03 82);
 
   --destructive: oklch(0.55 0.19 25);
   --destructive-foreground: oklch(0.97 0.01 80);
 
-  --border: oklch(0.4 0.05 60 / 45%);
-  --input: oklch(0.32 0.03 50);
-  --ring: oklch(0.8 0.14 85);
+  --border: oklch(0.45 0.06 80 / 42%);
+  --input: oklch(0.3 0.03 84);
+  --ring: oklch(0.83 0.15 78);
 
-  --gold: oklch(0.8 0.14 85);
-  --gold-soft: oklch(0.88 0.09 88);
-  --copper: oklch(0.65 0.16 55);
-  --ember: oklch(0.65 0.16 55);
+  --gold: oklch(0.83 0.15 78);
+  --gold-soft: oklch(0.91 0.1 88);
+  --copper: oklch(0.62 0.14 45);
+  --ember: oklch(0.68 0.17 48);
 
   --gradient-gold: linear-gradient(
     115deg,
-    oklch(0.7 0.11 70),
-    oklch(0.9 0.1 90),
-    oklch(0.68 0.13 58)
+    oklch(0.72 0.13 62),
+    oklch(0.93 0.11 92),
+    oklch(0.66 0.14 46)
   );
-  --gradient-bordo: linear-gradient(160deg, oklch(0.3 0.04 50), oklch(0.18 0.02 45));
+  --gradient-bordo: linear-gradient(160deg, oklch(0.285 0.034 84), oklch(0.17 0.018 82));
   --gradient-veil: linear-gradient(
     to bottom,
-    oklch(0.14 0.015 45 / 22%) 0%,
-    oklch(0.16 0.018 45 / 45%) 40%,
-    oklch(0.19 0.02 45 / 72%) 70%,
-    oklch(0.22 0.02 45 / 94%) 90%,
-    oklch(0.22 0.02 45) 100%
+    oklch(0.13 0.014 82 / 22%) 0%,
+    oklch(0.15 0.016 82 / 45%) 40%,
+    oklch(0.17 0.017 82 / 72%) 70%,
+    oklch(0.19 0.017 82 / 94%) 90%,
+    oklch(0.19 0.017 82) 100%
   );
   --gradient-page: linear-gradient(
     to bottom,
-    oklch(0.22 0.02 45) 0%,
-    oklch(0.22 0.02 45) 16%,
-    oklch(0.212 0.022 46) 42%,
-    oklch(0.2 0.02 46) 72%,
-    oklch(0.195 0.018 48) 100%
+    oklch(0.19 0.017 82) 0%,
+    oklch(0.19 0.017 82) 16%,
+    oklch(0.185 0.019 84) 42%,
+    oklch(0.175 0.018 86) 72%,
+    oklch(0.168 0.016 88) 100%
   );
 
-  --shadow-luxe: 0 30px 70px -30px oklch(0.06 0.02 45 / 85%);
-  --shadow-gold: 0 0 0 1px oklch(0.8 0.14 85 / 22%), 0 24px 60px -28px oklch(0.8 0.14 85 / 40%);
+  --shadow-luxe: 0 30px 70px -30px oklch(0.05 0.02 82 / 85%);
+  --shadow-gold: 0 0 0 1px oklch(0.83 0.15 78 / 24%), 0 24px 60px -28px oklch(0.83 0.15 78 / 42%);
   --ease-luxe: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -158,7 +158,10 @@
 @utility surface-glass {
   background: color-mix(in oklab, var(--surface) 62%, transparent);
   backdrop-filter: blur(18px) saturate(140%);
-  border: 1px solid color-mix(in oklab, var(--gold) 16%, transparent);
+  border: 1px solid color-mix(in oklab, var(--gold) 26%, transparent);
+  box-shadow:
+    inset 0 0 0 4px color-mix(in oklab, var(--background) 45%, transparent),
+    inset 0 0 0 5px color-mix(in oklab, var(--gold) 16%, transparent);
 }
 
 @utility hairline-gold {
@@ -254,13 +257,13 @@
   background:
     radial-gradient(
       ellipse 70% 42% at 50% 38%,
-      oklch(0.11 0.015 45 / 55%) 0%,
-      oklch(0.11 0.015 45 / 32%) 45%,
+      oklch(0.10 0.014 82 / 55%) 0%,
+      oklch(0.10 0.014 82 / 32%) 45%,
       transparent 78%
     ),
     linear-gradient(
       to bottom,
-      oklch(0.11 0.015 45 / 26%) 0%,
+      oklch(0.10 0.014 82 / 26%) 0%,
       transparent 34%,
       transparent 80%,
       transparent 100%
@@ -278,13 +281,13 @@
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    oklch(0.30 0.05 55 / 12%) 12%,
-    oklch(0.28 0.04 50 / 32%) 26%,
-    oklch(0.255 0.028 48 / 58%) 40%,
-    oklch(0.235 0.022 46 / 82%) 54%,
-    oklch(0.22 0.02 45 / 95%) 68%,
-    oklch(0.22 0.02 45 / 70%) 82%,
-    oklch(0.22 0.02 45 / 28%) 92%,
+    oklch(0.28 0.05 70 / 12%) 12%,
+    oklch(0.25 0.038 78 / 32%) 26%,
+    oklch(0.225 0.026 80 / 58%) 40%,
+    oklch(0.205 0.02 82 / 82%) 54%,
+    oklch(0.19 0.017 82 / 95%) 68%,
+    oklch(0.19 0.017 82 / 70%) 82%,
+    oklch(0.19 0.017 82 / 28%) 92%,
     transparent 100%
   );
 }
@@ -295,12 +298,27 @@
 }
 
 @utility glass-ikram {
-  background: color-mix(in oklab, var(--surface) 26%, transparent);
+  position: relative;
+  background: color-mix(in oklab, var(--surface) 30%, transparent);
   backdrop-filter: blur(10px) saturate(135%);
-  border: 1px solid color-mix(in oklab, var(--gold) 22%, transparent);
-  box-shadow: 0 18px 44px -28px oklch(0.06 0.02 45 / 70%);
+  border-radius: 0;
+  clip-path: polygon(
+    18px 0,
+    calc(100% - 18px) 0,
+    100% 18px,
+    100% calc(100% - 18px),
+    calc(100% - 18px) 100%,
+    18px 100%,
+    0 calc(100% - 18px),
+    0 18px
+  );
+  box-shadow:
+    inset 0 0 0 1px color-mix(in oklab, var(--gold) 38%, transparent),
+    inset 0 0 0 6px color-mix(in oklab, var(--background) 30%, transparent),
+    inset 0 0 0 7px color-mix(in oklab, var(--copper) 26%, transparent),
+    0 18px 44px -28px oklch(0.05 0.02 82 / 75%);
   &:hover {
-    background: color-mix(in oklab, var(--surface) 38%, transparent);
+    background: color-mix(in oklab, var(--surface) 42%, transparent);
   }
 }
 
