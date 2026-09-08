@@ -369,3 +369,64 @@
     transparent 100%
   );
 }
+
+/* ——— Börekçi Musa'ya özgü çerçeve dili: "kıvrım / hamur katı" ——— */
+
+/* Tüm kart yüzeylerinde ortak imza: asimetrik kıvrım + çift ince altın hat */
+@utility crimp {
+  position: relative;
+  border-radius: 2.4rem 0.8rem 2.4rem 0.8rem;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border-radius: inherit;
+    border: 1px solid color-mix(in oklab, var(--gold) 24%, transparent);
+    pointer-events: none;
+    opacity: 0.75;
+    transition: opacity 0.6s var(--ease-luxe);
+  }
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+@utility crimp-alt {
+  position: relative;
+  border-radius: 0.8rem 2.4rem 0.8rem 2.4rem;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border-radius: inherit;
+    border: 1px solid color-mix(in oklab, var(--gold) 24%, transparent);
+    pointer-events: none;
+    opacity: 0.75;
+  }
+}
+
+/* Fotoğraf çerçevesi — un serpilmiş kenar hissi */
+@utility photo-crimp {
+  position: relative;
+  border-radius: 2rem 0.7rem 2rem 0.7rem;
+  box-shadow:
+    inset 0 0 0 1px color-mix(in oklab, var(--gold) 28%, transparent),
+    var(--shadow-soft);
+}
+
+/* Form alanları — kutu değil, hafif kavisli hamur şeridi */
+@utility field-crimp {
+  border-radius: 1.1rem 0.4rem 1.1rem 0.4rem;
+  background: color-mix(in oklab, var(--surface) 60%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--gold) 22%, transparent);
+  transition:
+    box-shadow 0.5s var(--ease-luxe),
+    background 0.5s var(--ease-luxe);
+  &:focus {
+    outline: none;
+    background: color-mix(in oklab, var(--surface) 78%, transparent);
+    box-shadow:
+      inset 0 0 0 1px color-mix(in oklab, var(--gold) 55%, transparent),
+      0 0 26px -10px color-mix(in oklab, var(--gold) 50%, transparent);
+  }
+}
