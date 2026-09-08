@@ -3,10 +3,10 @@ import { CroissantIcon, MessageCircle, Phone } from "lucide-react";
 import { Emblem } from "./Emblem";
 import { SITE, whatsappLink } from "@/lib/site";
 
-const EMBERS = Array.from({ length: 14 }, (_, i) => ({
-  left: `${(i * 7.3 + 5) % 96}%`,
-  duration: `${6 + (i % 5) * 1.7}s`,
-  delay: `${(i % 7) * 1.1}s`,
+const MOTES = Array.from({ length: 16 }, (_, i) => ({
+  left: `${(i * 6.4 + 4) % 96}%`,
+  duration: `${9 + (i % 6) * 1.6}s`,
+  delay: `${(i % 8) * 1.3}s`,
 }));
 
 export function Hero({ title, subtitle }: { title: string; subtitle: string }) {
@@ -21,9 +21,9 @@ export function Hero({ title, subtitle }: { title: string; subtitle: string }) {
         className="ken-burns absolute inset-0 size-full object-cover object-center"
         style={{
           maskImage:
-            "linear-gradient(to bottom, oklch(0 0 0) 0%, oklch(0 0 0) 46%, oklch(0 0 0 / 0.82) 64%, oklch(0 0 0 / 0.45) 82%, oklch(0 0 0 / 0.12) 94%, transparent 100%)",
+            "linear-gradient(to bottom, oklch(0 0 0) 0%, oklch(0 0 0) 48%, oklch(0 0 0 / 0.82) 66%, oklch(0 0 0 / 0.42) 84%, oklch(0 0 0 / 0.1) 94%, transparent 100%)",
           WebkitMaskImage:
-            "linear-gradient(to bottom, oklch(0 0 0) 0%, oklch(0 0 0) 46%, oklch(0 0 0 / 0.82) 64%, oklch(0 0 0 / 0.45) 82%, oklch(0 0 0 / 0.12) 94%, transparent 100%)",
+            "linear-gradient(to bottom, oklch(0 0 0) 0%, oklch(0 0 0) 48%, oklch(0 0 0 / 0.82) 66%, oklch(0 0 0 / 0.42) 84%, oklch(0 0 0 / 0.1) 94%, transparent 100%)",
         }}
       />
       <div
@@ -31,18 +31,22 @@ export function Hero({ title, subtitle }: { title: string; subtitle: string }) {
         style={{ background: "var(--gradient-veil)" }}
         aria-hidden="true"
       />
+      {/* fırın sıcaklığı — yumuşak buğu ve ışık süzülmesi */}
       <div
-        className="smoke-veil absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-background via-background/35 to-transparent"
+        className="warm-haze pointer-events-none absolute inset-0"
         aria-hidden="true"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 40% at 50% 30%, color-mix(in oklab, var(--gold) 16%, transparent) 0%, transparent 70%)",
+        }}
       />
-      <div className="hero-focus" aria-hidden="true" />
       <div className="hero-join" aria-hidden="true" />
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-        {EMBERS.map((e, i) => (
+        {MOTES.map((m, i) => (
           <span
             key={i}
-            className="ember"
-            style={{ left: e.left, animationDuration: e.duration, animationDelay: e.delay }}
+            className="flour-mote"
+            style={{ left: m.left, animationDuration: m.duration, animationDelay: m.delay }}
           />
         ))}
       </div>
@@ -50,39 +54,39 @@ export function Hero({ title, subtitle }: { title: string; subtitle: string }) {
       <div className="relative z-10 flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-5 py-20 text-center">
         <Emblem />
         <h1
-          className="mt-10 font-display text-5xl leading-[1.05] font-semibold text-balance sm:text-7xl"
-          style={{ filter: "drop-shadow(0 3px 14px oklch(0.10 0.02 50 / 70%))" }}
+          className="mt-9 font-display text-5xl leading-[1.05] font-semibold text-balance sm:text-7xl"
+          style={{ filter: "drop-shadow(0 3px 14px oklch(0.10 0.02 40 / 70%))" }}
         >
           <span className="text-gilded">{title}</span>
         </h1>
         <p
-          className="mt-5 max-w-2xl text-sm tracking-[0.22em] text-muted-foreground uppercase sm:text-base"
-          style={{ textShadow: "0 2px 10px oklch(0.10 0.02 50 / 70%)" }}
+          className="mt-5 max-w-2xl text-sm leading-relaxed text-cream/85 sm:text-base"
+          style={{ textShadow: "0 2px 10px oklch(0.10 0.02 40 / 75%)" }}
         >
           {subtitle}
         </p>
-        <div className="hairline-gold mt-8 h-px w-56" />
+        <div className="dashed-flour mt-8 w-48" />
 
-        <div className="mt-10 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+        <div className="mt-10 flex w-full max-w-md flex-col items-stretch gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center">
           <a
             href="#menu"
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-gold/50 bg-primary px-8 py-3.5 text-sm font-semibold tracking-wide text-gold-soft transition-all duration-500 hover:-translate-y-0.5 hover:border-gold hover:shadow-[var(--shadow-gold)]"
+            className="capsule-warm inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-semibold tracking-wide"
           >
-            <CroissantIcon className="size-4" strokeWidth={1.6} /> Menüyü İncele
+            <CroissantIcon className="size-4" strokeWidth={1.7} /> Menüyü Keşfet
           </a>
           <a
             href={whatsappLink()}
             target="_blank"
             rel="noopener noreferrer"
-            className="surface-glass inline-flex items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold tracking-wide transition-all duration-500 hover:-translate-y-0.5 hover:shadow-[var(--shadow-gold)]"
+            className="capsule-ghost inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-semibold tracking-wide text-cream"
           >
-            <MessageCircle className="size-4" strokeWidth={1.6} /> WhatsApp Sipariş
+            <MessageCircle className="size-4 text-gold" strokeWidth={1.7} /> WhatsApp İletişim
           </a>
           <a
             href={SITE.phoneHref}
-            className="surface-glass inline-flex items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold tracking-wide transition-all duration-500 hover:-translate-y-0.5 hover:shadow-[var(--shadow-gold)]"
+            className="capsule-ghost inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-semibold tracking-wide text-gold-soft"
           >
-            <Phone className="size-4" strokeWidth={1.6} /> Hemen Ara
+            <Phone className="size-4 text-gold" strokeWidth={1.7} /> Hemen Ara: {SITE.phone}
           </a>
         </div>
       </div>

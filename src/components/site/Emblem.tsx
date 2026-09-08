@@ -8,15 +8,11 @@ export function Emblem({ className, compact = false }: { className?: string; com
         alt="Börekçi Musa logosu"
         width={1200}
         height={1200}
-        className="h-auto w-full max-w-full object-contain"
-        style={{
-          maxWidth: compact ? "min(170px, 60vw)" : "min(380px, 80vw)",
-          filter:
-            "drop-shadow(0 2px 8px oklch(0.10 0.02 50 / 60%)) drop-shadow(0 10px 30px oklch(0.10 0.02 50 / 45%))",
-        }}
+        className="logo-halo h-auto w-full max-w-full object-contain"
+        style={{ maxWidth: compact ? "min(160px, 56vw)" : "min(340px, 78vw)" }}
       />
       {!compact ? (
-        <p className="mt-4 text-[0.62rem] tracking-[0.5em] text-muted-foreground uppercase">
+        <p className="mt-4 text-[0.62rem] tracking-[0.5em] text-cream/70 uppercase">
           Nilüfer / Bursa
         </p>
       ) : null}
