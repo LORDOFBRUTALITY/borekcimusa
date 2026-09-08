@@ -69,24 +69,34 @@ export function ReviewsSection() {
         <div className="space-y-4">
           {reviews.length === 0 ? (
             <Reveal>
-              <p className="rounded-2xl border border-gold/15 bg-surface p-8 text-center text-sm text-muted-foreground">
+              <p className="float-card rounded-[2rem] p-8 text-center text-sm text-muted-foreground">
                 Henüz yayınlanmış yorum yok. İlk yorumu siz bırakın.
               </p>
             </Reveal>
           ) : (
             reviews.map((review, index) => (
               <Reveal key={review.id} delay={index * 45}>
-                <article className="lift rounded-2xl border border-gold/15 bg-surface p-6">
-                  <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4">
-                    <h3 className="truncate font-display text-lg font-semibold">
+                <article
+                  className="float-card relative p-7"
+                  style={{ borderRadius: "2rem 2rem 2rem 0.35rem" }}
+                >
+                  <span
+                    className="pointer-events-none absolute -bottom-3 left-0 size-0"
+                    style={{
+                      borderTop: "14px solid color-mix(in oklab, var(--surface) 78%, transparent)",
+                      borderRight: "16px solid transparent",
+                    }}
+                    aria-hidden="true"
+                  />
+                  <p className="font-display text-2xl leading-none text-gold">“</p>
+                  <p className="mt-2 text-sm leading-relaxed text-cream/90">{review.comment}</p>
+                  <div className="mt-5 flex items-center justify-between gap-4">
+                    <h3 className="truncate font-display text-lg font-semibold text-cream">
                       {review.full_name}
                     </h3>
                     <Stars value={review.rating} />
                   </div>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    {review.comment}
-                  </p>
-                  <time className="mt-4 block text-xs tracking-wide text-muted-foreground/70">
+                  <time className="mt-2 block text-xs tracking-wide text-muted-foreground/70">
                     {new Date(review.created_at).toLocaleDateString("tr-TR", {
                       day: "2-digit",
                       month: "long",
@@ -97,6 +107,7 @@ export function ReviewsSection() {
               </Reveal>
             ))
           )}
+
         </div>
 
         <Reveal>
