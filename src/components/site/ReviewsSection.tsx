@@ -69,7 +69,7 @@ export function ReviewsSection() {
         <div className="space-y-4">
           {reviews.length === 0 ? (
             <Reveal>
-              <p className="float-card rounded-[2rem] p-8 text-center text-sm text-muted-foreground">
+              <p className="float-card crimp p-8 text-center text-sm text-muted-foreground">
                 Henüz yayınlanmış yorum yok. İlk yorumu siz bırakın.
               </p>
             </Reveal>
@@ -77,8 +77,7 @@ export function ReviewsSection() {
             reviews.map((review, index) => (
               <Reveal key={review.id} delay={index * 45}>
                 <article
-                  className="float-card relative p-7"
-                  style={{ borderRadius: "2rem 2rem 2rem 0.35rem" }}
+                  className={`float-card relative p-7 ${index % 2 ? "crimp-alt" : "crimp"}`}
                 >
                   <span
                     className="pointer-events-none absolute -bottom-3 left-0 size-0"
@@ -116,7 +115,7 @@ export function ReviewsSection() {
               event.preventDefault();
               mutation.mutate();
             }}
-            className="surface-bakery sticky top-8 space-y-4 rounded-[2rem] p-6"
+            className="surface-bakery crimp sticky top-8 space-y-4 p-6"
 
           >
             <h3 className="font-display text-xl font-semibold text-gold-soft">Yorum Bırakın</h3>
@@ -130,7 +129,7 @@ export function ReviewsSection() {
                 onChange={(event) => setFullName(event.target.value)}
                 maxLength={80}
                 required
-                className="mt-2 w-full rounded-lg border border-gold/20 bg-background/60 px-4 py-2.5 text-sm outline-none focus:border-gold/60"
+                className="field-crimp mt-2 w-full px-4 py-2.5 text-sm"
               />
             </div>
             <div>
@@ -166,7 +165,7 @@ export function ReviewsSection() {
                 maxLength={1000}
                 rows={4}
                 required
-                className="mt-2 w-full resize-none rounded-lg border border-gold/20 bg-background/60 px-4 py-2.5 text-sm outline-none focus:border-gold/60"
+                className="field-crimp mt-2 w-full resize-none px-4 py-2.5 text-sm"
               />
             </div>
             <button

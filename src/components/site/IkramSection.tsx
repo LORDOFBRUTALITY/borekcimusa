@@ -21,7 +21,7 @@ export function IkramSection() {
       />
 
       <Reveal className="mx-auto max-w-2xl">
-        <div className="surface-bakery relative mx-auto flex flex-col items-center gap-6 rounded-[3rem] px-8 py-12 text-center sm:px-14">
+        <div className="surface-bakery crimp relative mx-auto flex flex-col items-center gap-6 px-8 py-12 text-center sm:px-14">
           <p className="text-xs font-semibold tracking-[0.42em] text-gold uppercase">
             Müessesemizin İkramı
           </p>

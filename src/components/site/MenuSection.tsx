@@ -40,13 +40,8 @@ export function MenuSection() {
                     <Reveal key={item.id} delay={index * 55} as="article">
                       <div
                         className={`float-card group flex flex-col overflow-hidden sm:items-stretch ${
-                          flipped ? "sm:flex-row-reverse" : "sm:flex-row"
+                          flipped ? "crimp-alt sm:flex-row-reverse" : "crimp sm:flex-row"
                         }`}
-                        style={{
-                          borderRadius: flipped
-                            ? "2.75rem 1rem 2.75rem 1rem"
-                            : "1rem 2.75rem 1rem 2.75rem",
-                        }}
                       >
                         <div className="relative shrink-0 overflow-hidden sm:w-[42%]">
                           {item.image_url ? (

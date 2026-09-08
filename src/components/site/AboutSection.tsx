@@ -10,10 +10,7 @@ export function AboutSection({ about, history }: { about: string; history: strin
     <section id="hakkimizda" className="relative px-5 pt-16 pb-24 sm:pt-20 sm:pb-32">
       <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
         <Reveal>
-          <div
-            className="relative overflow-hidden shadow-[var(--shadow-soft)]"
-            style={{ borderRadius: "3rem 1rem 3rem 1rem" }}
-          >
+          <div className="photo-crimp relative overflow-hidden">
 
             <img
               src={galleryImage}
@@ -52,10 +49,7 @@ export function AboutSection({ about, history }: { about: string; history: strin
           {campaigns.length > 0 ? (
             <Reveal delay={180} className="mt-10 space-y-3">
               {campaigns.map((campaign) => (
-                <div
-                  key={campaign.id}
-                  className="surface-glass rounded-2xl px-5 py-4"
-                >
+                <div key={campaign.id} className="surface-glass crimp px-5 py-4">
                   <p className="text-sm font-semibold tracking-wide text-gold">{campaign.title}</p>
                   <p className="mt-1 text-sm text-muted-foreground">{campaign.description}</p>
                 </div>

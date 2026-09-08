@@ -16,7 +16,11 @@ export function ReasonsSection() {
           const Icon = reason.icon;
           return (
             <Reveal key={reason.title} delay={index * 55}>
-              <div className="float-card flex h-full flex-col items-center gap-3 rounded-[2rem] px-6 py-8 text-center">
+              <div
+                className={`float-card flex h-full flex-col items-center gap-3 px-6 py-9 text-center ${
+                  index % 2 ? "crimp-alt" : "crimp"
+                }`}
+              >
                 <span
                   className="grid size-14 place-items-center rounded-full"
                   style={{

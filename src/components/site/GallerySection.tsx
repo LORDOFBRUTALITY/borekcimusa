@@ -34,7 +34,7 @@ export function GallerySection() {
             <button
               type="button"
               onClick={() => setActive(index)}
-              className="group relative block w-full overflow-hidden rounded-[1.75rem] shadow-[var(--shadow-soft)]"
+              className="photo-crimp group relative block w-full overflow-hidden"
               aria-label={`${image.caption || "Galeri görseli"} — büyüt`}
             >
               <img
@@ -84,7 +84,7 @@ export function GallerySection() {
             <img
               src={images[active].image_url}
               alt={images[active].caption || "Galeri görseli"}
-              className="max-h-[78vh] w-auto rounded-2xl border border-gold/20 object-contain"
+              className="photo-crimp max-h-[78vh] w-auto object-contain"
             />
             <figcaption className="mt-4 text-center text-sm text-muted-foreground">
               {images[active].caption}
