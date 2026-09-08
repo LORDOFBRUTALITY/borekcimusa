@@ -111,8 +111,9 @@
   --shadow-glow: 0 0 0 1px oklch(0.82 0.13 82 / 22%), 0 0 34px -6px oklch(0.82 0.13 82 / 28%);
   --shadow-gold: var(--shadow-glow);
   --shadow-luxe: var(--shadow-soft);
-
+  --ease-luxe: cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 
 @layer base {
   * {
