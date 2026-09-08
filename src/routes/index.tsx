@@ -3,6 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { Hero } from "@/components/site/Hero";
 import { MenuSection } from "@/components/site/MenuSection";
 import { IkramSection } from "@/components/site/IkramSection";
+import { HoursBand } from "@/components/site/HoursBand";
+
 import { AboutSection } from "@/components/site/AboutSection";
 import { ReasonsSection } from "@/components/site/ReasonsSection";
 import { GallerySection } from "@/components/site/GallerySection";
@@ -77,7 +79,8 @@ export const Route = createFileRoute("/")({
 
 const FALLBACK = {
   hero_title: "Çıtır Çıtır Sıcak Lezzet",
-  hero_subtitle: "Nilüfer'de Günün İlk Işıklarıyla Başlayan Geleneksel Fırın Lezzeti",
+  hero_subtitle: "Nilüfer'de Günün İlk Işıklarıyla Sıcak Fırın Lezzeti",
+
   about_text:
     "Börekçi Musa, Bursa Nilüfer'de her sabah erken saatlerde fırınını yakan, el açması börek geleneğini sürdüren bir aile işletmesidir.",
   history_text:
