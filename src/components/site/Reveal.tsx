@@ -62,7 +62,7 @@ export function SectionHeading({
       <h2 className="mt-4 text-4xl leading-tight font-semibold text-balance sm:text-5xl">
         <span className="text-gilded">{title}</span>
       </h2>
-      <div className="hairline-gold mx-auto mt-6 h-px w-40" />
+      <div className="dashed-flour mx-auto mt-6 w-40" />
       {description ? (
         <p className="mt-6 text-base leading-relaxed text-muted-foreground">{description}</p>
       ) : null}

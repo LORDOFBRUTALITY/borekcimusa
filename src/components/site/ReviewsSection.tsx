@@ -172,7 +172,8 @@ export function ReviewsSection() {
             <button
               type="submit"
               disabled={mutation.isPending}
-              className="w-full rounded-full border border-gold/50 bg-primary px-6 py-3 text-sm font-semibold tracking-wide text-gold-soft transition-all duration-500 hover:border-gold hover:shadow-[var(--shadow-gold)] disabled:opacity-60"
+              className="capsule-warm w-full px-6 py-3 text-sm font-semibold tracking-wide disabled:opacity-60"
+
             >
               {mutation.isPending ? "Gönderiliyor…" : "Yorumu Gönder"}
             </button>
