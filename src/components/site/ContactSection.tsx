@@ -105,7 +105,7 @@ export function ContactSection() {
                 src={src}
                 alt={`Börekçi Musa Instagram paylaşımı ${i + 1}`}
                 loading="lazy"
-                className="h-32 w-32 shrink-0 rounded-[1.6rem] object-cover transition-transform duration-700 ease-[var(--ease-luxe)] hover:scale-105 sm:h-40 sm:w-40"
+                className="photo-crimp h-32 w-32 shrink-0 object-cover transition-transform duration-700 ease-[var(--ease-luxe)] hover:scale-105 sm:h-40 sm:w-40"
               />
             ))}
           </div>
@@ -113,7 +113,7 @@ export function ContactSection() {
       </Reveal>
 
       <Reveal delay={160} className="mx-auto mt-10 max-w-5xl">
-        <div className="overflow-hidden rounded-[2.5rem]">
+        <div className="photo-crimp overflow-hidden">
           <iframe
             title="Börekçi Musa konum haritası"
             src={SITE.mapsEmbed}
