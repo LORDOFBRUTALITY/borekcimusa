@@ -1,4 +1,3 @@
-import { Check } from "lucide-react";
 import { REASONS } from "@/lib/site";
 import { Reveal } from "./Reveal";
 
@@ -6,33 +5,34 @@ export function ReasonsSection() {
   return (
     <section id="neden" className="relative px-4 py-24 sm:py-32">
       <Reveal className="text-center">
-        <h2 className="mx-auto font-display text-[clamp(1.55rem,6.4vw,3rem)] leading-tight font-semibold tracking-tight whitespace-nowrap">
+        <h2 className="mx-auto font-display text-[clamp(1.6rem,6.4vw,3rem)] leading-tight font-semibold tracking-tight whitespace-nowrap">
           <span className="text-gilded">Neden Börekçi Musa?</span>
         </h2>
-        <div className="hairline-gold mx-auto mt-6 h-px w-40" />
+        <div className="dashed-flour mx-auto mt-6 w-40" />
       </Reveal>
-      <div className="mx-auto mt-14 grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {REASONS.map((reason, index) => (
-          <Reveal key={reason.title} delay={index * 55}>
-            <div className="lift group relative h-full overflow-hidden rounded-2xl border border-gold/15 bg-surface p-6">
-              <span
-                className="absolute inset-x-0 -top-px h-px opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                style={{ background: "var(--gradient-gold)" }}
-              />
-              <div className="flex items-start gap-3">
-                <span className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-full border border-gold/40">
-                  <Check className="size-3.5 text-gold" strokeWidth={2} />
+
+      <div className="mx-auto mt-14 grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {REASONS.map((reason, index) => {
+          const Icon = reason.icon;
+          return (
+            <Reveal key={reason.title} delay={index * 55}>
+              <div className="float-card flex h-full flex-col items-center gap-3 rounded-[2rem] px-6 py-8 text-center">
+                <span
+                  className="grid size-14 place-items-center rounded-full"
+                  style={{
+                    background:
+                      "radial-gradient(circle at 30% 25%, color-mix(in oklab, var(--gold) 28%, transparent), transparent 72%)",
+                    boxShadow: "inset 0 0 0 1px color-mix(in oklab, var(--gold) 30%, transparent)",
+                  }}
+                >
+                  <Icon className="size-6 text-gold" strokeWidth={1.5} />
                 </span>
-                <div className="min-w-0">
-                  <h3 className="font-display text-xl font-semibold">{reason.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {reason.text}
-                  </p>
-                </div>
+                <h3 className="font-display text-xl font-semibold text-cream">{reason.title}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">{reason.text}</p>
               </div>
-            </div>
-          </Reveal>
-        ))}
+            </Reveal>
+          );
+        })}
       </div>
     </section>
   );
