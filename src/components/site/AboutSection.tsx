@@ -10,7 +10,11 @@ export function AboutSection({ about, history }: { about: string; history: strin
     <section id="hakkimizda" className="relative px-5 pt-16 pb-24 sm:pt-20 sm:pb-32">
       <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
         <Reveal>
-          <div className="relative overflow-hidden rounded-3xl border border-gold/15">
+          <div
+            className="relative overflow-hidden shadow-[var(--shadow-soft)]"
+            style={{ borderRadius: "3rem 1rem 3rem 1rem" }}
+          >
+
             <img
               src={galleryImage}
               alt="Fırından yeni çıkmış çıtır börek"
@@ -38,7 +42,8 @@ export function AboutSection({ about, history }: { about: string; history: strin
 
           <Reveal delay={120} className="mt-10">
             <h3 className="font-display text-2xl font-semibold text-gold-soft">Tarihçe</h3>
-            <div className="hairline-gold mt-4 h-px w-32" />
+            <div className="dashed-flour mt-4 w-32" />
+
             <p className="mt-4 leading-relaxed whitespace-pre-line text-muted-foreground">
               {history}
             </p>

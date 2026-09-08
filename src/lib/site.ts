@@ -1,3 +1,5 @@
+import { Bike as BikeIcon, Flame, Milk, Smile, Sunrise, Wheat } from "lucide-react";
+
 export const SITE = {
   name: "Börekçi Musa",
   tagline: "Taptaze Sıcak Börekler & Geleneksel Lezzetler",
@@ -22,34 +24,37 @@ export const whatsappLink = (message: string = SITE.whatsappMessage) =>
 
 export const REASONS = [
   {
-    title: "Her Sabah Taze & Sıcak",
-    text: "Günün ilk saatlerinde fırından yeni çıkan çıtır börekler.",
+    icon: Sunrise,
+    title: "Her Sabah 06:00'da Taze",
+    text: "Günün ilk ışıklarıyla fırından yeni çıkan sıcak börekler.",
   },
   {
-    title: "El Açması Kalite",
-    text: "Geleneksel yöntemlerle incecik açılan kat kat hamur.",
+    icon: Wheat,
+    title: "İncecik El Açması Hamur",
+    text: "Geleneksel yöntemle açılan kat kat, çıtır çıtır hamur.",
   },
   {
-    title: "Kaliteli Malzeme",
-    text: "Hakiki tereyağı, taze peynir ve özenle seçilmiş içerikler.",
+    icon: Milk,
+    title: "Hakiki Tereyağı & Taze Malzeme",
+    text: "Gerçek tereyağı, taze peynir ve özenle seçilmiş içerikler.",
   },
   {
-    title: "Meşhur Tahinli Pide",
-    text: "Bursa'nın damak çatlatan geleneksel tahinli lezzeti.",
+    icon: Flame,
+    title: "Bursa'nın Meşhur Tahinli Pidesi",
+    text: "Taş fırında pişen, damak çatlatan geleneksel tahinli pide.",
   },
   {
-    title: "Güler Yüzlü Esnaflık",
-    text: "Musa & Ahmet Ustaların samimi ve sıcak karşılaması.",
+    icon: Smile,
+    title: "Musa & Ahmet Usta'dan Güler Yüz",
+    text: "Samimi esnaflık, sıcak karşılama ve dostluk sofrası.",
   },
   {
-    title: "Hijyenik Fırın Mutfak",
-    text: "Şeffaf ve yüksek hijyen standartlarında üretim.",
-  },
-  {
-    title: "Hızlı Paket & Adrese Servis",
-    text: "Evinize ve iş yerinize sıcacık teslimat.",
+    icon: BikeIcon,
+    title: "Hızlı Paket & Hijyenik Üretim",
+    text: "Şeffaf mutfak standardı ve sıcacık, hızlı paket servis.",
   },
 ] as const;
+
 
 export const CATEGORY_ORDER = [
   "Çıtır Tepsi Börekleri",

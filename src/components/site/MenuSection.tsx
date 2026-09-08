@@ -21,49 +21,72 @@ export function MenuSection() {
     <section id="menu" className="relative px-5 py-24 sm:py-32">
       <SectionHeading eyebrow="Menü" title="Fırından Sofranıza" />
 
-      <div className="mx-auto mt-16 max-w-6xl space-y-20">
+      <div className="mx-auto mt-16 max-w-5xl space-y-20">
         {categories.map((category) => (
           <div key={category}>
             <Reveal className="flex items-center gap-5">
               <h3 className="font-display text-2xl font-semibold whitespace-nowrap text-gold-soft sm:text-3xl">
                 {category}
               </h3>
-              <span className="hairline-gold h-px flex-1" />
+              <span className="dashed-flour flex-1" />
             </Reveal>
 
-            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-10 space-y-6">
               {items
                 .filter((item) => item.category === category)
-                .map((item, index) => (
-                  <Reveal key={item.id} delay={index * 60} as="article">
-                    <div className="lift group relative h-full overflow-hidden rounded-2xl border border-gold/15 bg-surface">
-                      <div className="relative aspect-[4/3] overflow-hidden">
-                        {item.image_url ? (
-                          <img
-                            src={item.image_url}
-                            alt={item.name}
-                            loading="lazy"
-                            width={1024}
-                            height={768}
-                            className="size-full object-cover transition-transform duration-[1.1s] ease-[var(--ease-luxe)] group-hover:scale-110"
+                .map((item, index) => {
+                  const flipped = index % 2 === 1;
+                  return (
+                    <Reveal key={item.id} delay={index * 55} as="article">
+                      <div
+                        className={`float-card group flex flex-col overflow-hidden sm:items-stretch ${
+                          flipped ? "sm:flex-row-reverse" : "sm:flex-row"
+                        }`}
+                        style={{
+                          borderRadius: flipped
+                            ? "2.75rem 1rem 2.75rem 1rem"
+                            : "1rem 2.75rem 1rem 2.75rem",
+                        }}
+                      >
+                        <div className="relative shrink-0 overflow-hidden sm:w-[42%]">
+                          {item.image_url ? (
+                            <img
+                              src={item.image_url}
+                              alt={item.name}
+                              loading="lazy"
+                              width={1024}
+                              height={768}
+                              className="aspect-[16/10] size-full object-cover transition-transform duration-[1.2s] ease-[var(--ease-luxe)] group-hover:scale-105 sm:aspect-auto sm:min-h-[13rem]"
+                            />
+                          ) : (
+                            <div className="aspect-[16/10] size-full bg-secondary sm:min-h-[13rem]" />
+                          )}
+                          <div
+                            className="absolute inset-0"
+                            style={{
+                              background:
+                                "linear-gradient(to right, transparent 45%, color-mix(in oklab, var(--surface) 55%, transparent) 100%)",
+                            }}
                           />
-                        ) : (
-                          <div className="size-full bg-secondary" />
-                        )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/25 to-transparent" />
-                        <span className="absolute top-3 right-3 rounded-full border border-gold/40 bg-background/70 px-3 py-1 text-xs font-semibold tracking-wide text-gold backdrop-blur-md">
-                          {priceLabel(item.price)}
-                        </span>
+                        </div>
+
+                        <div className="flex flex-1 flex-col justify-center gap-2 px-7 py-7">
+                          <h4 className="font-display text-2xl font-semibold text-cream">
+                            {item.name}
+                          </h4>
+                          <p className="text-sm leading-relaxed text-muted-foreground">
+                            {item.description}
+                          </p>
+                          {item.price > 0 ? (
+                            <p className="mt-2 font-display text-xl font-semibold tracking-wide text-gold">
+                              {priceLabel(item.price)}
+                            </p>
+                          ) : null}
+                        </div>
                       </div>
-                      <div className="p-5">
-                        <h4 className="font-display text-xl font-semibold">{item.name}</h4>
-                        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                          {item.description}
-                        </p>
-                      </div>
-                    </div>
-                  </Reveal>
-                ))}
+                    </Reveal>
+                  );
+                })}
             </div>
           </div>
         ))}
