@@ -116,7 +116,8 @@ export function ReviewsSection() {
               event.preventDefault();
               mutation.mutate();
             }}
-            className="surface-glass sticky top-8 space-y-4 rounded-2xl p-6"
+            className="surface-bakery sticky top-8 space-y-4 rounded-[2rem] p-6"
+
           >
             <h3 className="font-display text-xl font-semibold text-gold-soft">Yorum Bırakın</h3>
             <div>

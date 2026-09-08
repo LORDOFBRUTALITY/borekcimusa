@@ -91,6 +91,7 @@ function HomePage() {
   return (
     <main>
       <Hero title={value("hero_title")} subtitle={value("hero_subtitle")} />
+      <HoursBand />
       <MenuSection />
       <IkramSection />
       <AboutSection about={value("about_text")} history={value("history_text")} />
@@ -100,5 +101,6 @@ function HomePage() {
       <ContactSection />
       <WhatsAppFab />
     </main>
+
   );
 }

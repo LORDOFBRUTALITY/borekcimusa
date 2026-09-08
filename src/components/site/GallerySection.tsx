@@ -34,7 +34,7 @@ export function GallerySection() {
             <button
               type="button"
               onClick={() => setActive(index)}
-              className="group relative block w-full overflow-hidden rounded-2xl border border-gold/15"
+              className="group relative block w-full overflow-hidden rounded-[1.75rem] shadow-[var(--shadow-soft)]"
               aria-label={`${image.caption || "Galeri görseli"} — büyüt`}
             >
               <img
