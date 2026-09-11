@@ -56,8 +56,10 @@ export const REASONS = [
 ] as const;
 
 
+export const DRINK_CATEGORY = "İçecekler";
+
 export const CATEGORY_ORDER = [
-  "Çıtır Tepsi Börekleri",
-  "Pide & Fırın Özel",
-  "İçecekler & Tamamlayıcılar",
+  "Börek Çeşitleri",
+  "Mayalı Çeşitleri",
+  DRINK_CATEGORY,
 ] as const;
