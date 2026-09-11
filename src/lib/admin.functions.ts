@@ -88,6 +88,7 @@ export const saveIkram = createServerFn({ method: "POST" })
     await requireAdmin();
     const db = await admin();
     const { id, ...values } = data;
+    await cleanupReplacedImage("ikramlar", id, values.image_url);
     const res = id
       ? await db.from("ikramlar").update(values).eq("id", id)
       : await db.from("ikramlar").insert(values);
