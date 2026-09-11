@@ -2,6 +2,9 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import {
   adminDb as admin,
+  cleanupReplacedImage,
+  cleanupRowImage,
+  cleanupVariantImages,
   getAdminSession,
   normalizeUser,
   removeMediaByUrl,
@@ -85,6 +88,7 @@ export const saveIkram = createServerFn({ method: "POST" })
     await requireAdmin();
     const db = await admin();
     const { id, ...values } = data;
+    await cleanupReplacedImage("ikramlar", id, values.image_url);
     const res = id
       ? await db.from("ikramlar").update(values).eq("id", id)
       : await db.from("ikramlar").insert(values);
@@ -97,6 +101,7 @@ export const deleteIkram = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     await requireAdmin();
     const db = await admin();
+    await cleanupRowImage("ikramlar", data.id);
     const res = await db.from("ikramlar").delete().eq("id", data.id);
     if (res.error) throw new Error(res.error.message);
     return { ok: true as const };
@@ -122,6 +127,7 @@ export const saveMenuItem = createServerFn({ method: "POST" })
     await requireAdmin();
     const db = await admin();
     const { id, ...values } = data;
+    await cleanupReplacedImage("menu_items", id, values.image_url);
     const res = id
       ? await db.from("menu_items").update(values).eq("id", id)
       : await db.from("menu_items").insert(values);
@@ -134,6 +140,8 @@ export const deleteMenuItem = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     await requireAdmin();
     const db = await admin();
+    await cleanupVariantImages(data.id);
+    await cleanupRowImage("menu_items", data.id);
     const res = await db.from("menu_items").delete().eq("id", data.id);
     if (res.error) throw new Error(res.error.message);
     return { ok: true as const };
@@ -155,6 +163,7 @@ export const saveMenuVariant = createServerFn({ method: "POST" })
     await requireAdmin();
     const db = await admin();
     const { id, ...values } = data;
+    await cleanupReplacedImage("menu_variants", id, values.image_url);
     const res = id
       ? await db.from("menu_variants").update(values).eq("id", id)
       : await db.from("menu_variants").insert(values);
@@ -167,6 +176,7 @@ export const deleteMenuVariant = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     await requireAdmin();
     const db = await admin();
+    await cleanupRowImage("menu_variants", data.id);
     const res = await db.from("menu_variants").delete().eq("id", data.id);
     if (res.error) throw new Error(res.error.message);
     return { ok: true as const };
@@ -195,6 +205,7 @@ export const deleteGalleryImage = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     await requireAdmin();
     const db = await admin();
+    await cleanupRowImage("gallery_images", data.id);
     const res = await db.from("gallery_images").delete().eq("id", data.id);
     if (res.error) throw new Error(res.error.message);
     return { ok: true as const };
