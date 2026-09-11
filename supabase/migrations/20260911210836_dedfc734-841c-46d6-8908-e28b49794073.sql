@@ -1,0 +1,1 @@
+ALTER TABLE public.menu_items ADD COLUMN IF NOT EXISTS price_unit text NOT NULL DEFAULT '';

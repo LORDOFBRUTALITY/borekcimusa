@@ -102,6 +102,7 @@ export type Database = {
           is_visible: boolean
           name: string
           price: number
+          price_unit: string
           sort_order: number
         }
         Insert: {
@@ -113,6 +114,7 @@ export type Database = {
           is_visible?: boolean
           name: string
           price?: number
+          price_unit?: string
           sort_order?: number
         }
         Update: {
@@ -124,6 +126,7 @@ export type Database = {
           is_visible?: boolean
           name?: string
           price?: number
+          price_unit?: string
           sort_order?: number
         }
         Relationships: []
