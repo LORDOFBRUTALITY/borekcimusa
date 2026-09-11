@@ -9,6 +9,7 @@ import {
   Clock,
   Images,
   LayoutDashboard,
+  Layers,
   Leaf,
   LogOut,
   Megaphone,
@@ -28,6 +29,7 @@ import {
   deleteIkram as adminDeleteIkram,
   deleteMedia as adminDeleteMedia,
   deleteMenuItem as adminDeleteMenuItem,
+  deleteMenuVariant as adminDeleteMenuVariant,
   deleteReview as adminDeleteReview,
   adminLoadAll,
   adminLogin,
@@ -36,6 +38,7 @@ import {
   saveGalleryImage as adminSaveGalleryImage,
   saveIkram as adminSaveIkram,
   saveMenuItem as adminSaveMenuItem,
+  saveMenuVariant as adminSaveMenuVariant,
   saveSiteContent as adminSaveSiteContent,
   setReviewApproval as adminSetReviewApproval,
   adminStatus,
@@ -45,6 +48,7 @@ import {
 } from "@/lib/admin.functions";
 
 import { Emblem } from "@/components/site/Emblem";
+import { SETTING_FIELDS } from "@/lib/settings";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -278,6 +282,8 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
   const logout = useServerFn(adminLogout);
   const saveItem = useServerFn(adminSaveMenuItem);
   const removeItem = useServerFn(adminDeleteMenuItem);
+  const saveVariant = useServerFn(adminSaveMenuVariant);
+  const removeVariant = useServerFn(adminDeleteMenuVariant);
   const addImage = useServerFn(adminSaveGalleryImage);
   const editImage = useServerFn(adminUpdateGalleryImage);
   const removeImage = useServerFn(adminDeleteGalleryImage);
@@ -310,6 +316,8 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
     comment: string;
     rating: number;
   } | null>(null);
+  const [openVariants, setOpenVariants] = useState<string | null>(null);
+  const [variantDraft, setVariantDraft] = useState({ itemId: "", name: "" });
   const [busy, setBusy] = useState(false);
 
   const refresh = async () => {
@@ -342,6 +350,7 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
     content[key] ?? data?.content.find((row) => row.key === key)?.value ?? "";
 
   const menu = data?.menu ?? [];
+  const variants = data?.variants ?? [];
   const gallery = data?.gallery ?? [];
   const reviews = data?.reviews ?? [];
   const campaigns = data?.campaigns ?? [];
@@ -1255,6 +1264,46 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
                         () =>
                           saveContent({ data: { key: field.key, value: contentValue(field.key) } }),
                         "Metin kaydedildi.",
+                      )
+                    }
+                  >
+                    Kaydet
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            <div className="space-y-4 rounded-2xl border border-gold/15 bg-surface p-5">
+              <h2 className="font-display text-xl font-semibold text-gold-soft">
+                İletişim & Teknik Ayarlar
+              </h2>
+              <p className="text-xs text-muted-foreground">
+                Telefon, WhatsApp numarası ve hazır mesajı, Instagram adresi, adres ve harita
+                bağlantısı buradan güncellenir.
+              </p>
+              {SETTING_FIELDS.map((field) => (
+                <div key={field.key}>
+                  <label htmlFor={field.key} className="text-xs tracking-widest uppercase">
+                    {field.label}
+                  </label>
+                  <textarea
+                    id={field.key}
+                    rows={field.key === "maps_embed" ? 3 : 2}
+                    placeholder={field.placeholder}
+                    className={`mt-2 resize-none ${inputClass}`}
+                    value={contentValue(field.key)}
+                    onChange={(event) =>
+                      setContent({ ...content, [field.key]: event.target.value })
+                    }
+                  />
+                  <button
+                    type="button"
+                    className="mt-2 text-xs tracking-widest text-gold uppercase"
+                    onClick={() =>
+                      void run(
+                        () =>
+                          saveContent({ data: { key: field.key, value: contentValue(field.key) } }),
+                        "Ayar kaydedildi.",
                       )
                     }
                   >
