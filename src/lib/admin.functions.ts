@@ -176,6 +176,7 @@ export const deleteMenuVariant = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     await requireAdmin();
     const db = await admin();
+    await cleanupRowImage("menu_variants", data.id);
     const res = await db.from("menu_variants").delete().eq("id", data.id);
     if (res.error) throw new Error(res.error.message);
     return { ok: true as const };
