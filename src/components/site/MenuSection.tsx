@@ -166,6 +166,7 @@ function DrinkBoard({ items }: { items: MenuItem[] }) {
 
 export function MenuSection() {
   const { data: items = [] } = useQuery(menuQuery);
+  const [active, setActive] = useState<MenuItem | null>(null);
 
   const categories = [
     ...CATEGORY_ORDER.filter((c) => items.some((i) => i.category === c)),
