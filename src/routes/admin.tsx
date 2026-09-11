@@ -619,9 +619,9 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
 
             <div className="space-y-2">
               {menu.map((item) => (
+                <div key={item.id} className="rounded-xl border border-gold/15 bg-surface">
                 <div
-                  key={item.id}
-                  className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 rounded-xl border border-gold/15 bg-surface px-4 py-3 text-sm"
+                  className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-4 py-3 text-sm"
                 >
                   <img
                     src={item.image_url ?? "/images/menu-izgara.jpg"}
@@ -635,6 +635,16 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
                     <span className="ml-2 text-gold">{item.price} TL</span>
                   </p>
                   <div className="flex shrink-0 gap-2">
+                    <button
+                      type="button"
+                      className={ghostButton}
+                      onClick={() =>
+                        setOpenVariants(openVariants === item.id ? null : item.id)
+                      }
+                    >
+                      <Layers className="size-3.5" /> Çeşitler (
+                      {variants.filter((row) => row.menu_item_id === item.id).length})
+                    </button>
                     <button
                       type="button"
                       className={ghostButton}
@@ -666,6 +676,131 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
                       <Trash2 className="size-4 text-destructive" />
                     </button>
                   </div>
+                </div>
+
+                {openVariants === item.id ? (
+                  <div className="space-y-3 border-t border-gold/15 px-4 py-4">
+                    <p className="text-xs tracking-widest text-muted-foreground uppercase">
+                      {item.name} — Çeşitler ve Fotoğrafları
+                    </p>
+
+                    <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                      {variants
+                        .filter((row) => row.menu_item_id === item.id)
+                        .map((row) => (
+                          <div
+                            key={row.id}
+                            className="overflow-hidden rounded-xl border border-gold/15 bg-background/40"
+                          >
+                            {row.image_url ? (
+                              <img
+                                src={row.image_url}
+                                alt={row.name}
+                                loading="lazy"
+                                className="aspect-[4/3] w-full object-cover"
+                              />
+                            ) : null}
+                            <div className="space-y-2 p-3">
+                              <input
+                                className={inputClass}
+                                defaultValue={row.name}
+                                placeholder="Çeşit adı"
+                                onBlur={(event) =>
+                                  event.target.value.trim() && event.target.value !== row.name
+                                    ? void run(
+                                        () =>
+                                          saveVariant({
+                                            data: {
+                                              id: row.id,
+                                              menu_item_id: item.id,
+                                              name: event.target.value.trim(),
+                                              image_url: row.image_url,
+                                              sort_order: row.sort_order,
+                                            },
+                                          }),
+                                        "Çeşit güncellendi.",
+                                      )
+                                    : undefined
+                                }
+                              />
+                              <div className="grid grid-cols-2 gap-2">
+                                <label className={`${ghostButton} cursor-pointer justify-center`}>
+                                  <UploadCloud className="size-4" /> Fotoğraf
+                                  <input
+                                    type="file"
+                                    accept="image/png,image/jpeg,image/webp"
+                                    className="hidden"
+                                    onChange={(event) => {
+                                      const file = event.target.files?.[0];
+                                      event.target.value = "";
+                                      if (!file) return;
+                                      void run(async () => {
+                                        const url = await uploadFile(file);
+                                        await saveVariant({
+                                          data: {
+                                            id: row.id,
+                                            menu_item_id: item.id,
+                                            name: row.name,
+                                            image_url: url,
+                                            sort_order: row.sort_order,
+                                          },
+                                        });
+                                      }, "Fotoğraf güncellendi.");
+                                    }}
+                                  />
+                                </label>
+                                <button
+                                  type="button"
+                                  disabled={busy}
+                                  className={`${ghostButton} justify-center`}
+                                  onClick={() =>
+                                    void run(
+                                      () => removeVariant({ data: { id: row.id } }),
+                                      "Çeşit silindi.",
+                                    )
+                                  }
+                                >
+                                  <Trash2 className="size-4 text-destructive" /> Sil
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                    </div>
+
+                    <div className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_auto]">
+                      <input
+                        className={inputClass}
+                        placeholder="Yeni çeşit adı (örn. Peynirli)"
+                        value={variantDraft.itemId === item.id ? variantDraft.name : ""}
+                        onChange={(event) =>
+                          setVariantDraft({ itemId: item.id, name: event.target.value })
+                        }
+                      />
+                      <button
+                        type="button"
+                        disabled={busy || variantDraft.itemId !== item.id || !variantDraft.name.trim()}
+                        className={buttonClass}
+                        onClick={() =>
+                          void run(async () => {
+                            await saveVariant({
+                              data: {
+                                menu_item_id: item.id,
+                                name: variantDraft.name.trim(),
+                                image_url: null,
+                                sort_order:
+                                  variants.filter((row) => row.menu_item_id === item.id).length + 1,
+                              },
+                            });
+                            setVariantDraft({ itemId: item.id, name: "" });
+                          }, "Çeşit eklendi.")
+                        }
+                      >
+                        <Plus className="size-4" /> Çeşit Ekle
+                      </button>
+                    </div>
+                  </div>
+                ) : null}
                 </div>
               ))}
               {menu.length === 0 ? (
