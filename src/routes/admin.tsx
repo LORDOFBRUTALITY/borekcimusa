@@ -632,12 +632,18 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
                 <div
                   className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-4 py-3 text-sm"
                 >
-                  <img
-                    src={item.image_url ?? "/images/menu-izgara.jpg"}
-                    alt={item.name}
-                    loading="lazy"
-                    className="size-12 rounded-lg object-cover"
-                  />
+                  {item.image_url ? (
+                    <img
+                      src={item.image_url}
+                      alt={item.name}
+                      loading="lazy"
+                      className="size-12 rounded-lg object-cover"
+                    />
+                  ) : (
+                    <span className="grid size-12 place-items-center rounded-lg border border-gold/20 bg-background text-[10px] text-muted-foreground">
+                      Görselsiz
+                    </span>
+                  )}
                   <p className="truncate">
                     <span className="text-muted-foreground">{item.category} · </span>
                     <span className="font-semibold">{item.name}</span>
