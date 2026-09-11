@@ -7,6 +7,7 @@ export type MenuItem = {
   name: string;
   description: string;
   price: number;
+  price_unit: string;
   image_url: string | null;
   sort_order: number;
   is_visible: boolean;

@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { Hero } from "@/components/site/Hero";
 import { MenuSection } from "@/components/site/MenuSection";
-import { IkramSection } from "@/components/site/IkramSection";
+
 import { HoursBand } from "@/components/site/HoursBand";
 
 import { AboutSection } from "@/components/site/AboutSection";
@@ -96,7 +96,7 @@ function HomePage() {
       <Hero title={value("hero_title")} subtitle={value("hero_subtitle")} />
       <HoursBand />
       <MenuSection />
-      <IkramSection />
+      
       <AboutSection about={value("about_text")} history={value("history_text")} />
       <ReasonsSection />
       <GallerySection />
