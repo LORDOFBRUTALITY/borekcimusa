@@ -10,6 +10,8 @@ const MOTES = Array.from({ length: 16 }, (_, i) => ({
 }));
 
 export function Hero({ title, subtitle }: { title: string; subtitle: string }) {
+  const settings = useSiteSettings();
+
   return (
     <section id="hero" className="relative isolate min-h-[100svh]">
       <img
