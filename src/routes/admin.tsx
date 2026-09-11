@@ -9,6 +9,7 @@ import {
   Clock,
   Images,
   LayoutDashboard,
+  Layers,
   Leaf,
   LogOut,
   Megaphone,
@@ -28,6 +29,7 @@ import {
   deleteIkram as adminDeleteIkram,
   deleteMedia as adminDeleteMedia,
   deleteMenuItem as adminDeleteMenuItem,
+  deleteMenuVariant as adminDeleteMenuVariant,
   deleteReview as adminDeleteReview,
   adminLoadAll,
   adminLogin,
@@ -36,6 +38,7 @@ import {
   saveGalleryImage as adminSaveGalleryImage,
   saveIkram as adminSaveIkram,
   saveMenuItem as adminSaveMenuItem,
+  saveMenuVariant as adminSaveMenuVariant,
   saveSiteContent as adminSaveSiteContent,
   setReviewApproval as adminSetReviewApproval,
   adminStatus,
@@ -45,6 +48,7 @@ import {
 } from "@/lib/admin.functions";
 
 import { Emblem } from "@/components/site/Emblem";
+import { SETTING_FIELDS } from "@/lib/settings";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -278,6 +282,8 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
   const logout = useServerFn(adminLogout);
   const saveItem = useServerFn(adminSaveMenuItem);
   const removeItem = useServerFn(adminDeleteMenuItem);
+  const saveVariant = useServerFn(adminSaveMenuVariant);
+  const removeVariant = useServerFn(adminDeleteMenuVariant);
   const addImage = useServerFn(adminSaveGalleryImage);
   const editImage = useServerFn(adminUpdateGalleryImage);
   const removeImage = useServerFn(adminDeleteGalleryImage);
@@ -310,6 +316,8 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
     comment: string;
     rating: number;
   } | null>(null);
+  const [openVariants, setOpenVariants] = useState<string | null>(null);
+  const [variantDraft, setVariantDraft] = useState({ itemId: "", name: "" });
   const [busy, setBusy] = useState(false);
 
   const refresh = async () => {
@@ -342,6 +350,7 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
     content[key] ?? data?.content.find((row) => row.key === key)?.value ?? "";
 
   const menu = data?.menu ?? [];
+  const variants = data?.variants ?? [];
   const gallery = data?.gallery ?? [];
   const reviews = data?.reviews ?? [];
   const campaigns = data?.campaigns ?? [];
@@ -619,9 +628,9 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
 
             <div className="space-y-2">
               {menu.map((item) => (
+                <div key={item.id} className="rounded-xl border border-gold/15 bg-surface">
                 <div
-                  key={item.id}
-                  className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 rounded-xl border border-gold/15 bg-surface px-4 py-3 text-sm"
+                  className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-4 py-3 text-sm"
                 >
                   <img
                     src={item.image_url ?? "/images/menu-izgara.jpg"}
@@ -635,6 +644,16 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
                     <span className="ml-2 text-gold">{item.price} TL</span>
                   </p>
                   <div className="flex shrink-0 gap-2">
+                    <button
+                      type="button"
+                      className={ghostButton}
+                      onClick={() =>
+                        setOpenVariants(openVariants === item.id ? null : item.id)
+                      }
+                    >
+                      <Layers className="size-3.5" /> Çeşitler (
+                      {variants.filter((row) => row.menu_item_id === item.id).length})
+                    </button>
                     <button
                       type="button"
                       className={ghostButton}
@@ -666,6 +685,131 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
                       <Trash2 className="size-4 text-destructive" />
                     </button>
                   </div>
+                </div>
+
+                {openVariants === item.id ? (
+                  <div className="space-y-3 border-t border-gold/15 px-4 py-4">
+                    <p className="text-xs tracking-widest text-muted-foreground uppercase">
+                      {item.name} — Çeşitler ve Fotoğrafları
+                    </p>
+
+                    <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                      {variants
+                        .filter((row) => row.menu_item_id === item.id)
+                        .map((row) => (
+                          <div
+                            key={row.id}
+                            className="overflow-hidden rounded-xl border border-gold/15 bg-background/40"
+                          >
+                            {row.image_url ? (
+                              <img
+                                src={row.image_url}
+                                alt={row.name}
+                                loading="lazy"
+                                className="aspect-[4/3] w-full object-cover"
+                              />
+                            ) : null}
+                            <div className="space-y-2 p-3">
+                              <input
+                                className={inputClass}
+                                defaultValue={row.name}
+                                placeholder="Çeşit adı"
+                                onBlur={(event) =>
+                                  event.target.value.trim() && event.target.value !== row.name
+                                    ? void run(
+                                        () =>
+                                          saveVariant({
+                                            data: {
+                                              id: row.id,
+                                              menu_item_id: item.id,
+                                              name: event.target.value.trim(),
+                                              image_url: row.image_url,
+                                              sort_order: row.sort_order,
+                                            },
+                                          }),
+                                        "Çeşit güncellendi.",
+                                      )
+                                    : undefined
+                                }
+                              />
+                              <div className="grid grid-cols-2 gap-2">
+                                <label className={`${ghostButton} cursor-pointer justify-center`}>
+                                  <UploadCloud className="size-4" /> Fotoğraf
+                                  <input
+                                    type="file"
+                                    accept="image/png,image/jpeg,image/webp"
+                                    className="hidden"
+                                    onChange={(event) => {
+                                      const file = event.target.files?.[0];
+                                      event.target.value = "";
+                                      if (!file) return;
+                                      void run(async () => {
+                                        const url = await uploadFile(file);
+                                        await saveVariant({
+                                          data: {
+                                            id: row.id,
+                                            menu_item_id: item.id,
+                                            name: row.name,
+                                            image_url: url,
+                                            sort_order: row.sort_order,
+                                          },
+                                        });
+                                      }, "Fotoğraf güncellendi.");
+                                    }}
+                                  />
+                                </label>
+                                <button
+                                  type="button"
+                                  disabled={busy}
+                                  className={`${ghostButton} justify-center`}
+                                  onClick={() =>
+                                    void run(
+                                      () => removeVariant({ data: { id: row.id } }),
+                                      "Çeşit silindi.",
+                                    )
+                                  }
+                                >
+                                  <Trash2 className="size-4 text-destructive" /> Sil
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                    </div>
+
+                    <div className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_auto]">
+                      <input
+                        className={inputClass}
+                        placeholder="Yeni çeşit adı (örn. Peynirli)"
+                        value={variantDraft.itemId === item.id ? variantDraft.name : ""}
+                        onChange={(event) =>
+                          setVariantDraft({ itemId: item.id, name: event.target.value })
+                        }
+                      />
+                      <button
+                        type="button"
+                        disabled={busy || variantDraft.itemId !== item.id || !variantDraft.name.trim()}
+                        className={buttonClass}
+                        onClick={() =>
+                          void run(async () => {
+                            await saveVariant({
+                              data: {
+                                menu_item_id: item.id,
+                                name: variantDraft.name.trim(),
+                                image_url: null,
+                                sort_order:
+                                  variants.filter((row) => row.menu_item_id === item.id).length + 1,
+                              },
+                            });
+                            setVariantDraft({ itemId: item.id, name: "" });
+                          }, "Çeşit eklendi.")
+                        }
+                      >
+                        <Plus className="size-4" /> Çeşit Ekle
+                      </button>
+                    </div>
+                  </div>
+                ) : null}
                 </div>
               ))}
               {menu.length === 0 ? (
@@ -1120,6 +1264,46 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
                         () =>
                           saveContent({ data: { key: field.key, value: contentValue(field.key) } }),
                         "Metin kaydedildi.",
+                      )
+                    }
+                  >
+                    Kaydet
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            <div className="space-y-4 rounded-2xl border border-gold/15 bg-surface p-5">
+              <h2 className="font-display text-xl font-semibold text-gold-soft">
+                İletişim & Teknik Ayarlar
+              </h2>
+              <p className="text-xs text-muted-foreground">
+                Telefon, WhatsApp numarası ve hazır mesajı, Instagram adresi, adres ve harita
+                bağlantısı buradan güncellenir.
+              </p>
+              {SETTING_FIELDS.map((field) => (
+                <div key={field.key}>
+                  <label htmlFor={field.key} className="text-xs tracking-widest uppercase">
+                    {field.label}
+                  </label>
+                  <textarea
+                    id={field.key}
+                    rows={field.key === "maps_embed" ? 3 : 2}
+                    placeholder={field.placeholder}
+                    className={`mt-2 resize-none ${inputClass}`}
+                    value={contentValue(field.key)}
+                    onChange={(event) =>
+                      setContent({ ...content, [field.key]: event.target.value })
+                    }
+                  />
+                  <button
+                    type="button"
+                    className="mt-2 text-xs tracking-widest text-gold uppercase"
+                    onClick={() =>
+                      void run(
+                        () =>
+                          saveContent({ data: { key: field.key, value: contentValue(field.key) } }),
+                        "Ayar kaydedildi.",
                       )
                     }
                   >

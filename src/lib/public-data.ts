@@ -36,6 +36,26 @@ export const ikramlarQuery = queryOptions({
   },
 });
 
+export type MenuVariant = {
+  id: string;
+  menu_item_id: string;
+  name: string;
+  image_url: string | null;
+  sort_order: number;
+};
+
+export const menuVariantsQuery = queryOptions({
+  queryKey: ["menu_variants"],
+  queryFn: async (): Promise<MenuVariant[]> => {
+    const { data, error } = await supabase
+      .from("menu_variants")
+      .select("id, menu_item_id, name, image_url, sort_order")
+      .order("sort_order", { ascending: true });
+    if (error) throw error;
+    return (data ?? []) as MenuVariant[];
+  },
+});
+
 export const menuQuery = queryOptions({
   queryKey: ["menu"],
   queryFn: async (): Promise<MenuItem[]> => {

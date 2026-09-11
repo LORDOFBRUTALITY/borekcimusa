@@ -7,7 +7,7 @@ export const SITE = {
   phone: "0541 441 02 15",
   phoneHref: "tel:+905414410215",
   whatsapp: "905414410215",
-  whatsappMessage: "Merhaba, sipariş vermek istiyorum.",
+  whatsappMessage: "Selamün aleyküm, bilgi almak için yazmıştım ustam.",
   instagram: "borekcimusa16",
   instagramUrl: "https://www.instagram.com/borekcimusa16?stkn=MXgwNm54eTFwNGJ5Zw==",
   mapsEmbed:
