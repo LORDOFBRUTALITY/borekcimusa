@@ -1,7 +1,7 @@
 import { CroissantIcon, MessageCircle, Phone } from "lucide-react";
 
 import { Emblem } from "./Emblem";
-import { SITE, whatsappLink } from "@/lib/site";
+import { useSiteSettings } from "@/lib/settings";
 
 const MOTES = Array.from({ length: 16 }, (_, i) => ({
   left: `${(i * 6.4 + 4) % 96}%`,
@@ -75,7 +75,7 @@ export function Hero({ title, subtitle }: { title: string; subtitle: string }) {
             <CroissantIcon className="size-4" strokeWidth={1.7} /> Menüyü Keşfet
           </a>
           <a
-            href={whatsappLink()}
+            href={settings.whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
             className="capsule-ghost inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-semibold tracking-wide text-cream"
@@ -83,10 +83,10 @@ export function Hero({ title, subtitle }: { title: string; subtitle: string }) {
             <MessageCircle className="size-4 text-gold" strokeWidth={1.7} /> WhatsApp İletişim
           </a>
           <a
-            href={SITE.phoneHref}
+            href={settings.phoneHref}
             className="capsule-ghost inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-semibold tracking-wide text-gold-soft"
           >
-            <Phone className="size-4 text-gold" strokeWidth={1.7} /> Hemen Ara: {SITE.phone}
+            <Phone className="size-4 text-gold" strokeWidth={1.7} /> Hemen Ara: {settings.phone}
           </a>
         </div>
       </div>

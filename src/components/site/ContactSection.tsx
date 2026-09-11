@@ -1,5 +1,6 @@
 import { Instagram, MapPin, MessageCircle, Phone } from "lucide-react";
-import { SITE, whatsappLink } from "@/lib/site";
+import { SITE } from "@/lib/site";
+import { useSiteSettings } from "@/lib/settings";
 import { Emblem } from "./Emblem";
 import { Reveal, SectionHeading } from "./Reveal";
 
@@ -48,17 +49,19 @@ function Ribbon({
 }
 
 export function ContactSection() {
+  const settings = useSiteSettings();
+
   return (
     <section id="iletisim" className="relative px-5 py-24 sm:py-32">
       <SectionHeading eyebrow="İletişim" title="Bize Ulaşın" />
 
       <div className="mx-auto mt-14 max-w-4xl space-y-4">
         <Reveal>
-          <Ribbon href={SITE.phoneHref} icon={Phone} label="Telefon" value={SITE.phone} />
+          <Ribbon href={settings.phoneHref} icon={Phone} label="Telefon" value={settings.phone} />
         </Reveal>
         <Reveal delay={60}>
           <Ribbon
-            href={whatsappLink()}
+            href={settings.whatsappHref}
             external
             icon={MessageCircle}
             label="WhatsApp"
@@ -67,11 +70,11 @@ export function ContactSection() {
         </Reveal>
         <Reveal delay={120}>
           <Ribbon
-            href={SITE.instagramUrl}
+            href={settings.instagramUrl}
             external
             icon={Instagram}
             label="Instagram"
-            value={`@${SITE.instagram}`}
+            value={`@${settings.instagram}`}
           />
         </Reveal>
         <Reveal delay={180}>
@@ -84,7 +87,7 @@ export function ContactSection() {
             >
               <MapPin className="size-5 text-gold" strokeWidth={1.6} />
             </span>
-            <p className="min-w-0 text-sm text-muted-foreground">{SITE.district}</p>
+            <p className="min-w-0 text-sm text-muted-foreground">{settings.address}</p>
           </div>
         </Reveal>
       </div>
@@ -92,11 +95,11 @@ export function ContactSection() {
       {/* Instagram akış şeridi */}
       <Reveal delay={120} className="mx-auto mt-14 max-w-5xl">
         <a
-          href={SITE.instagramUrl}
+          href={settings.instagramUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="block"
-          aria-label={`Instagram: @${SITE.instagram}`}
+          aria-label={`Instagram: @${settings.instagram}`}
         >
           <div className="flex gap-3 overflow-x-auto pb-3">
             {INSTA_STRIP.map((src, i) => (
@@ -116,7 +119,7 @@ export function ContactSection() {
         <div className="photo-crimp overflow-hidden">
           <iframe
             title="Börekçi Musa konum haritası"
-            src={SITE.mapsEmbed}
+            src={settings.mapsEmbed}
             loading="lazy"
             allowFullScreen
             referrerPolicy="strict-origin-when-cross-origin"
@@ -129,7 +132,7 @@ export function ContactSection() {
         <span className="dashed-flour mx-auto mb-10 block w-full max-w-3xl" />
         <Emblem compact className="items-center" />
         <p className="mt-4 text-xs tracking-[0.28em] text-muted-foreground uppercase">
-          © {new Date().getFullYear()} {SITE.name} · {SITE.district}
+          © {new Date().getFullYear()} {SITE.name} · {settings.address}
         </p>
       </footer>
     </section>
