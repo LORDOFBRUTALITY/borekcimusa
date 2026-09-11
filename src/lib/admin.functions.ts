@@ -101,6 +101,7 @@ export const deleteIkram = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     await requireAdmin();
     const db = await admin();
+    await cleanupRowImage("ikramlar", data.id);
     const res = await db.from("ikramlar").delete().eq("id", data.id);
     if (res.error) throw new Error(res.error.message);
     return { ok: true as const };
