@@ -203,7 +203,7 @@ export function MenuSection() {
               ) : (
                 <div className="grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
                   {list.map((item, index) => (
-                    <ProductCard key={item.id} item={item} index={index} />
+                    <ProductCard key={item.id} item={item} index={index} onOpen={setActive} />
                   ))}
                 </div>
               )}
@@ -211,6 +211,8 @@ export function MenuSection() {
           );
         })}
       </div>
+
+      <VariantDialog item={active} onClose={() => setActive(null)} />
     </section>
   );
 }
