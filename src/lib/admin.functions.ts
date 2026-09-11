@@ -2,6 +2,9 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import {
   adminDb as admin,
+  cleanupReplacedImage,
+  cleanupRowImage,
+  cleanupVariantImages,
   getAdminSession,
   normalizeUser,
   removeMediaByUrl,
