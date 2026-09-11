@@ -63,7 +63,7 @@ export const Route = createFileRoute("/admin")({
   component: AdminPage,
 });
 
-const CATEGORIES = ["Izgaralar", "Dürümler", "Tatlılar", "İçecekler", "Diğer"] as const;
+const CATEGORIES = ["Börek Çeşitleri", "Mayalı Çeşitleri", "İçecekler", "Diğer"] as const;
 
 const inputClass =
   "w-full rounded-lg border border-gold/20 bg-background/60 px-3 py-2 text-sm outline-none focus:border-gold/60";
@@ -194,10 +194,11 @@ function LoginCard({ onSignedIn }: { onSignedIn: () => Promise<boolean> }) {
 }
 
 const EMPTY_ITEM = {
-  category: "Izgaralar",
+  category: "Börek Çeşitleri",
   name: "",
   description: "",
   price: 0,
+  price_unit: "",
   image_url: "",
   sort_order: 0,
   is_visible: true,
@@ -208,7 +209,7 @@ type Tab = "dashboard" | "menu" | "ikramlar" | "gallery" | "reviews" | "settings
 const NAV: { id: Tab; label: string; icon: typeof LayoutDashboard }[] = [
   { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
   { id: "menu", label: "Menü Yönetimi", icon: UtensilsCrossed },
-  { id: "ikramlar", label: "İkramlar", icon: Leaf },
+  
   { id: "gallery", label: "Galeri", icon: Images },
   { id: "reviews", label: "Yorumlar", icon: MessageSquare },
   { id: "settings", label: "Site Ayarları", icon: Settings },
@@ -221,6 +222,54 @@ function fileToBase64(file: File) {
     reader.onerror = () => reject(new Error("Dosya okunamadı."));
     reader.readAsDataURL(file);
   });
+}
+
+function bytesToBase64(bytes: Uint8Array) {
+  let binary = "";
+  const chunk = 0x8000;
+  for (let i = 0; i < bytes.length; i += chunk) {
+    binary += String.fromCharCode(...bytes.subarray(i, i + chunk));
+  }
+  return btoa(binary);
+}
+
+const MAX_EDGE = 1200;
+
+/** Tarayıcıda yeniden boyutlandırıp sıkıştırır; dosya sunucuya KB seviyesinde gider. */
+async function prepareUpload(file: File) {
+  try {
+    const bitmap = await createImageBitmap(file);
+    const scale = Math.min(1, MAX_EDGE / Math.max(bitmap.width, bitmap.height));
+    const width = Math.max(1, Math.round(bitmap.width * scale));
+    const height = Math.max(1, Math.round(bitmap.height * scale));
+
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) throw new Error("canvas");
+    ctx.imageSmoothingQuality = "high";
+    ctx.drawImage(bitmap, 0, 0, width, height);
+    bitmap.close?.();
+
+    const blob = await new Promise<Blob | null>((resolve) =>
+      canvas.toBlob(resolve, "image/jpeg", 0.88),
+    );
+    if (!blob) throw new Error("blob");
+
+    const bytes = new Uint8Array(await blob.arrayBuffer());
+    return {
+      fileName: file.name.replace(/\.[^.]+$/, "") + ".jpg",
+      contentType: "image/jpeg",
+      dataBase64: bytesToBase64(bytes),
+    };
+  } catch {
+    return {
+      fileName: file.name,
+      contentType: file.type,
+      dataBase64: await fileToBase64(file),
+    };
+  }
 }
 
 function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
@@ -284,10 +333,8 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
   };
 
   const uploadFile = async (file: File) => {
-    const dataBase64 = await fileToBase64(file);
-    const result = await upload({
-      data: { fileName: file.name, contentType: file.type, dataBase64 },
-    });
+    const payload = await prepareUpload(file);
+    const result = await upload({ data: payload });
     return result.url;
   };
 
@@ -399,7 +446,7 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
             <StatCard icon={Clock} label="Son Güncelleme" value={lastUpdated} small />
             <StatCard icon={Images} label="Galeri Fotoğrafı" value={gallery.length} />
             <StatCard icon={Megaphone} label="Kampanya" value={campaigns.length} />
-            <StatCard icon={Leaf} label="İkram" value={ikramlar.length} />
+            
           </section>
         ) : null}
 
@@ -455,6 +502,32 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
                   className={`mt-2 ${inputClass}`}
                   value={draft.price}
                   onChange={(event) => setDraft({ ...draft, price: Number(event.target.value) })}
+                />
+              </div>
+              <div>
+                <label className="text-xs tracking-widest uppercase" htmlFor="punit">
+                  Fiyat Birimi (örn. Kg — boş bırakılabilir)
+                </label>
+                <input
+                  id="punit"
+                  className={`mt-2 ${inputClass}`}
+                  placeholder="Kg"
+                  value={draft.price_unit}
+                  onChange={(event) => setDraft({ ...draft, price_unit: event.target.value })}
+                />
+              </div>
+              <div>
+                <label className="text-xs tracking-widest uppercase" htmlFor="porder">
+                  Sıra Numarası
+                </label>
+                <input
+                  id="porder"
+                  type="number"
+                  className={`mt-2 ${inputClass}`}
+                  value={draft.sort_order}
+                  onChange={(event) =>
+                    setDraft({ ...draft, sort_order: Number(event.target.value) })
+                  }
                 />
               </div>
               <div className="sm:col-span-2">
@@ -520,6 +593,7 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
                           name: draft.name,
                           description: draft.description,
                           price: draft.price,
+                          price_unit: draft.price_unit,
                           image_url: draft.image_url || null,
                           sort_order: draft.sort_order,
                           is_visible: draft.is_visible,
@@ -571,6 +645,7 @@ function AdminShell({ onSignedOut }: { onSignedOut: () => void }) {
                           name: item.name,
                           description: item.description,
                           price: item.price,
+                          price_unit: item.price_unit ?? "",
                           image_url: item.image_url ?? "",
                           sort_order: item.sort_order,
                           is_visible: item.is_visible,
