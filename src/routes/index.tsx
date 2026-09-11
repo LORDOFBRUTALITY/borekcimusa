@@ -16,7 +16,7 @@ import { SITE } from "@/lib/site";
 
 const TITLE = "Börekçi Musa | Bursa Nilüfer Sıcak Börek & Tahinli Pide";
 const DESCRIPTION =
-  "Bursa Nilüfer'de her sabah taze çıtır tepsi börekleri, pastırmalı kaşarlı börek, tahinli pide ve su böreği. Sipariş: 0541 441 02 15.";
+  "Bursa Nilüfer'de her sabah taze kol böreği, su böreği, açma, poğaça ve tahinli pide. WhatsApp iletişim: 0541 441 02 15.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
