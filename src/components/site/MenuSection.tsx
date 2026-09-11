@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { menuQuery, type MenuItem } from "@/lib/public-data";
+import { menuQuery, menuVariantsQuery, type MenuItem, type MenuVariant } from "@/lib/public-data";
 import { CATEGORY_ORDER, DRINK_CATEGORY } from "@/lib/site";
-import { variantsFor } from "@/lib/menu-variants";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Reveal, SectionHeading } from "./Reveal";
 
