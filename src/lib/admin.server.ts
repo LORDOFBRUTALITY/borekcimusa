@@ -72,9 +72,45 @@ export async function uploadMediaFile(input: {
   return { path, url: `/api/public/media/${path}` };
 }
 
-export async function removeMediaByUrl(url: string) {
+export async function removeMediaByUrl(url: string | null | undefined) {
   const prefix = "/api/public/media/";
-  if (!url.startsWith(prefix)) return;
+  if (!url || !url.startsWith(prefix)) return;
   const db = await adminDb();
   await db.storage.from("media").remove([url.slice(prefix.length)]);
+}
+
+type ImageTable = "menu_items" | "menu_variants" | "ikramlar" | "gallery_images";
+
+async function currentImageUrl(table: ImageTable, id: string) {
+  const db = await adminDb();
+  const column = table === "gallery_images" ? "image_url" : "image_url";
+  const { data } = await db.from(table).select(column).eq("id", id).maybeSingle();
+  return (data as { image_url?: string | null } | null)?.image_url ?? null;
+}
+
+/** Deletes the stored file of a row when its image is being replaced by a different one. */
+export async function cleanupReplacedImage(
+  table: ImageTable,
+  id: string | undefined,
+  nextUrl: string | null | undefined,
+) {
+  if (!id) return;
+  const previous = await currentImageUrl(table, id);
+  if (previous && previous !== nextUrl) await removeMediaByUrl(previous);
+}
+
+/** Deletes the stored file of a row that is about to be removed. */
+export async function cleanupRowImage(table: ImageTable, id: string) {
+  const previous = await currentImageUrl(table, id);
+  await removeMediaByUrl(previous);
+}
+
+/** Deletes stored files of every variant belonging to a menu item. */
+export async function cleanupVariantImages(menuItemId: string) {
+  const db = await adminDb();
+  const { data } = await db
+    .from("menu_variants")
+    .select("image_url")
+    .eq("menu_item_id", menuItemId);
+  for (const row of data ?? []) await removeMediaByUrl(row.image_url);
 }
