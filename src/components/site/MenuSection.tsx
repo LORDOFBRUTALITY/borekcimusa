@@ -106,7 +106,9 @@ export function MenuSection() {
 
           return (
             <div key={category} className="space-y-10">
-              {catIndex > 0 ? <OvenStrip text={STRIPS[(catIndex - 1) % STRIPS.length]} /> : null}
+              {catIndex > 0 ? (
+                <OvenStrip text={STRIPS[(catIndex - 1) % STRIPS.length] ?? STRIPS[0]!} />
+              ) : null}
 
               <Reveal className="flex items-center gap-5">
                 <h3 className="font-display text-2xl font-semibold whitespace-nowrap text-gold-soft sm:text-3xl">
