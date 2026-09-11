@@ -163,6 +163,7 @@ export const saveMenuVariant = createServerFn({ method: "POST" })
     await requireAdmin();
     const db = await admin();
     const { id, ...values } = data;
+    await cleanupReplacedImage("menu_variants", id, values.image_url);
     const res = id
       ? await db.from("menu_variants").update(values).eq("id", id)
       : await db.from("menu_variants").insert(values);
