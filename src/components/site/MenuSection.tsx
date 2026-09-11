@@ -31,13 +31,14 @@ function OvenStrip({ text }: { text: string }) {
 function ProductCard({
   item,
   index,
+  variants,
   onOpen,
 }: {
   item: MenuItem;
   index: number;
+  variants: MenuVariant[];
   onOpen: (item: MenuItem) => void;
 }) {
-  const variants = variantsFor(item.name);
   const clickable = variants.length > 0;
 
   return (
@@ -96,12 +97,13 @@ function ProductCard({
 
 function VariantDialog({
   item,
+  variants,
   onClose,
 }: {
   item: MenuItem | null;
+  variants: MenuVariant[];
   onClose: () => void;
 }) {
-  const variants = item ? variantsFor(item.name) : [];
 
   return (
     <Dialog open={!!item} onOpenChange={(open) => (open ? null : onClose())}>
@@ -118,11 +120,11 @@ function VariantDialog({
         <div className="mt-2 grid grid-cols-2 gap-3 sm:grid-cols-3">
           {variants.map((variant) => (
             <figure
-              key={variant.name}
+              key={variant.id}
               className="overflow-hidden rounded-[1.1rem] border border-gold/20 bg-black/25"
             >
               <img
-                src={variant.image}
+                src={variant.image_url ?? "/images/menu-diger.jpg"}
                 alt={`${item?.name} - ${variant.name}`}
                 loading="lazy"
                 width={768}
@@ -165,6 +167,14 @@ function DrinkBoard({ items }: { items: MenuItem[] }) {
 
 export function MenuSection() {
   const { data: items = [] } = useQuery(menuQuery);
+  const { data: variants = [] } = useQuery(menuVariantsQuery);
+
+  const byItem = new Map<string, MenuVariant[]>();
+  for (const variant of variants) {
+    const list = byItem.get(variant.menu_item_id) ?? [];
+    list.push(variant);
+    byItem.set(variant.menu_item_id, list);
+  }
   const [active, setActive] = useState<MenuItem | null>(null);
 
   const categories = [
@@ -202,7 +212,13 @@ export function MenuSection() {
               ) : (
                 <div className="grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
                   {list.map((item, index) => (
-                    <ProductCard key={item.id} item={item} index={index} onOpen={setActive} />
+                    <ProductCard
+                      key={item.id}
+                      item={item}
+                      index={index}
+                      variants={byItem.get(item.id) ?? []}
+                      onOpen={setActive}
+                    />
                   ))}
                 </div>
               )}
@@ -211,7 +227,11 @@ export function MenuSection() {
         })}
       </div>
 
-      <VariantDialog item={active} onClose={() => setActive(null)} />
+      <VariantDialog
+        item={active}
+        variants={active ? (byItem.get(active.id) ?? []) : []}
+        onClose={() => setActive(null)}
+      />
     </section>
   );
 }
