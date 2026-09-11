@@ -1,6 +1,9 @@
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { menuQuery, type MenuItem } from "@/lib/public-data";
 import { CATEGORY_ORDER, DRINK_CATEGORY } from "@/lib/site";
+import { variantsFor } from "@/lib/menu-variants";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Reveal, SectionHeading } from "./Reveal";
 
 function priceLabel(item: MenuItem) {
@@ -26,10 +29,36 @@ function OvenStrip({ text }: { text: string }) {
   );
 }
 
-function ProductCard({ item, index }: { item: MenuItem; index: number }) {
+function ProductCard({
+  item,
+  index,
+  onOpen,
+}: {
+  item: MenuItem;
+  index: number;
+  onOpen: (item: MenuItem) => void;
+}) {
+  const variants = variantsFor(item.name);
+  const clickable = variants.length > 0;
+
   return (
     <Reveal delay={index * 45} as="article">
-      <div className="group flex h-full flex-col overflow-hidden rounded-[1.4rem] border border-gold/20 bg-surface/70 shadow-[0_14px_34px_-24px_rgba(0,0,0,0.9)] backdrop-blur-sm transition-all duration-500 ease-[var(--ease-luxe)] hover:-translate-y-1 hover:border-gold/45 hover:shadow-[0_20px_44px_-22px_color-mix(in_oklab,var(--gold)_45%,transparent)]">
+      <div
+        role={clickable ? "button" : undefined}
+        tabIndex={clickable ? 0 : undefined}
+        onClick={clickable ? () => onOpen(item) : undefined}
+        onKeyDown={
+          clickable
+            ? (e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  onOpen(item);
+                }
+              }
+            : undefined
+        }
+        className={`group flex h-full flex-col overflow-hidden rounded-[1.4rem] border border-gold/20 bg-surface/70 shadow-[0_14px_34px_-24px_rgba(0,0,0,0.9)] backdrop-blur-sm transition-all duration-500 ease-[var(--ease-luxe)] hover:-translate-y-1 hover:border-gold/45 hover:shadow-[0_20px_44px_-22px_color-mix(in_oklab,var(--gold)_45%,transparent)] ${clickable ? "cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/60" : ""}`}
+      >
         {item.image_url ? (
           <div className="relative overflow-hidden rounded-xl p-1.5">
             <img
@@ -40,6 +69,11 @@ function ProductCard({ item, index }: { item: MenuItem; index: number }) {
               height={768}
               className="aspect-[4/3] w-full rounded-xl object-cover transition-transform duration-[1.1s] ease-[var(--ease-luxe)] group-hover:scale-[1.06]"
             />
+            {clickable ? (
+              <span className="absolute right-3 bottom-3 rounded-full border border-gold/40 bg-black/55 px-2.5 py-1 text-[0.62rem] font-medium tracking-wide text-gold-soft backdrop-blur-sm">
+                {variants.length} çeşit · gör
+              </span>
+            ) : null}
           </div>
         ) : null}
 
@@ -58,6 +92,52 @@ function ProductCard({ item, index }: { item: MenuItem; index: number }) {
         </div>
       </div>
     </Reveal>
+  );
+}
+
+function VariantDialog({
+  item,
+  onClose,
+}: {
+  item: MenuItem | null;
+  onClose: () => void;
+}) {
+  const variants = item ? variantsFor(item.name) : [];
+
+  return (
+    <Dialog open={!!item} onOpenChange={(open) => (open ? null : onClose())}>
+      <DialogContent className="max-h-[85vh] max-w-3xl overflow-y-auto border-gold/30 bg-surface/95 backdrop-blur-md">
+        <DialogHeader>
+          <DialogTitle className="font-display text-xl text-gold sm:text-2xl">
+            {item?.name}
+          </DialogTitle>
+          {item ? (
+            <p className="text-sm text-muted-foreground">{priceLabel(item)}</p>
+          ) : null}
+        </DialogHeader>
+
+        <div className="mt-2 grid grid-cols-2 gap-3 sm:grid-cols-3">
+          {variants.map((variant) => (
+            <figure
+              key={variant.name}
+              className="overflow-hidden rounded-[1.1rem] border border-gold/20 bg-black/25"
+            >
+              <img
+                src={variant.image}
+                alt={`${item?.name} - ${variant.name}`}
+                loading="lazy"
+                width={768}
+                height={576}
+                className="aspect-[4/3] w-full object-cover"
+              />
+              <figcaption className="px-3 py-2 text-center font-display text-sm text-cream">
+                {variant.name}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }
 
@@ -86,6 +166,7 @@ function DrinkBoard({ items }: { items: MenuItem[] }) {
 
 export function MenuSection() {
   const { data: items = [] } = useQuery(menuQuery);
+  const [active, setActive] = useState<MenuItem | null>(null);
 
   const categories = [
     ...CATEGORY_ORDER.filter((c) => items.some((i) => i.category === c)),
@@ -122,7 +203,7 @@ export function MenuSection() {
               ) : (
                 <div className="grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
                   {list.map((item, index) => (
-                    <ProductCard key={item.id} item={item} index={index} />
+                    <ProductCard key={item.id} item={item} index={index} onOpen={setActive} />
                   ))}
                 </div>
               )}
@@ -130,6 +211,8 @@ export function MenuSection() {
           );
         })}
       </div>
+
+      <VariantDialog item={active} onClose={() => setActive(null)} />
     </section>
   );
 }
