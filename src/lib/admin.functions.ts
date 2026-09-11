@@ -205,6 +205,7 @@ export const deleteGalleryImage = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     await requireAdmin();
     const db = await admin();
+    await cleanupRowImage("gallery_images", data.id);
     const res = await db.from("gallery_images").delete().eq("id", data.id);
     if (res.error) throw new Error(res.error.message);
     return { ok: true as const };
