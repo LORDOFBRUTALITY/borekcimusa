@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { menuQuery, menuVariantsQuery, type MenuItem, type MenuVariant } from "@/lib/public-data";
 import { CATEGORY_ORDER, DRINK_CATEGORY } from "@/lib/site";
+import { mediaSrc } from "@/lib/media";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Reveal, SectionHeading } from "./Reveal";
 
@@ -62,7 +63,7 @@ function ProductCard({
         {item.image_url ? (
           <div className="relative overflow-hidden rounded-xl p-1.5">
             <img
-              src={item.image_url}
+              src={mediaSrc(item.image_url)}
               alt={item.name}
               loading="lazy"
               width={1024}
@@ -124,7 +125,7 @@ function VariantDialog({
               className="overflow-hidden rounded-[1.1rem] border border-gold/20 bg-black/25"
             >
               <img
-                src={variant.image_url ?? "/images/menu-diger.jpg"}
+                src={mediaSrc(variant.image_url) ?? "/images/menu-diger.jpg"}
                 alt={`${item?.name} - ${variant.name}`}
                 loading="lazy"
                 width={768}

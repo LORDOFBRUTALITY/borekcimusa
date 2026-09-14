@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { galleryQuery } from "@/lib/public-data";
+import { mediaSrc } from "@/lib/media";
 import { Reveal, SectionHeading } from "./Reveal";
 
 export function GallerySection() {
@@ -38,7 +39,7 @@ export function GallerySection() {
               aria-label={`${image.caption || "Galeri görseli"} — büyüt`}
             >
               <img
-                src={image.image_url}
+                src={mediaSrc(image.image_url)}
                 alt={image.caption || "Börekçi Musa galeri görseli"}
                 loading="lazy"
                 className="size-full object-cover transition-transform duration-[1.1s] ease-[var(--ease-luxe)] group-hover:scale-110"
@@ -82,7 +83,7 @@ export function GallerySection() {
           </button>
           <figure className="max-h-[86vh] max-w-5xl" onClick={(event) => event.stopPropagation()}>
             <img
-              src={images[active].image_url}
+              src={mediaSrc(images[active].image_url)}
               alt={images[active].caption || "Galeri görseli"}
               className="photo-crimp max-h-[78vh] w-auto object-contain"
             />
