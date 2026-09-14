@@ -11,5 +11,9 @@ export default defineConfig({
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
+    // Ana sayfa derleme sırasında hazır HTML olarak üretilir; böylece Node çalıştıramayan
+    // klasik bir hostingde (cPanel) de yayınlanabilir. Yönetim paneli hariç tutulur.
+    pages: [{ path: "/" }],
+    prerender: { enabled: true, autoStaticPathsDiscovery: false },
   },
 });
