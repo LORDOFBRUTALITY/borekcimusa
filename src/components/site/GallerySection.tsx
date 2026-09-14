@@ -21,31 +21,31 @@ export function GallerySection() {
   }, [active, images.length]);
 
   return (
-    <section id="galeri" className="relative px-5 py-24 sm:py-32">
+    <section id="galeri" className="relative px-5 py-16 sm:py-24">
       <SectionHeading
         eyebrow="Galeri"
         title="@borekcimusa16 Instagram'da Biz"
         description="Fırınımızdan en taze görseller ve günlük videolar için Instagram hesabımızı takip edin."
       />
 
-      <div className="mx-auto mt-14 max-w-6xl columns-2 gap-4 md:columns-3 [&>*]:mb-4">
+      <div className="mx-auto mt-10 grid max-w-5xl grid-cols-3 gap-2 sm:grid-cols-4 sm:gap-3 lg:grid-cols-6">
         {images.map((image, index) => (
-          <Reveal key={image.id} delay={(index % 6) * 50}>
+          <Reveal key={image.id} delay={(index % 6) * 40}>
             <button
               type="button"
               onClick={() => setActive(index)}
-              className="photo-crimp group relative block w-full overflow-hidden"
+              className="photo-crimp group relative block aspect-square w-full overflow-hidden"
               aria-label={`${image.caption || "Galeri görseli"} — büyüt`}
             >
               <img
                 src={image.image_url}
                 alt={image.caption || "Börekçi Musa galeri görseli"}
                 loading="lazy"
-                className="w-full object-cover transition-transform duration-[1.1s] ease-[var(--ease-luxe)] group-hover:scale-110"
+                className="size-full object-cover transition-transform duration-[1.1s] ease-[var(--ease-luxe)] group-hover:scale-110"
               />
               <span className="absolute inset-0 bg-gradient-to-t from-background/85 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
               {image.caption ? (
-                <span className="absolute bottom-3 left-4 translate-y-3 text-left text-sm font-medium text-gold-soft opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                <span className="absolute right-2 bottom-2 left-2 hidden translate-y-2 text-left text-xs leading-snug font-medium text-gold-soft opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 sm:block">
                   {image.caption}
                 </span>
               ) : null}

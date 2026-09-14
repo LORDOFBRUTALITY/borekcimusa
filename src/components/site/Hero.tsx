@@ -2,6 +2,7 @@ import { CroissantIcon, MessageCircle, Phone } from "lucide-react";
 
 import { Emblem } from "./Emblem";
 import { useSiteSettings } from "@/lib/settings";
+import heroTray from "@/assets/promo/WA0009.jpg.asset.json";
 
 const MOTES = Array.from({ length: 16 }, (_, i) => ({
   left: `${(i * 6.4 + 4) % 96}%`,
@@ -15,10 +16,10 @@ export function Hero({ title, subtitle }: { title: string; subtitle: string }) {
   return (
     <section id="hero" className="relative isolate min-h-[100svh]">
       <img
-        src="/images/hero-borek.jpg"
-        alt="Taş fırından yeni çıkmış, dumanı üstünde çıtır tepsi böreği"
+        src={heroTray.url}
+        alt="Börekçi Musa tezgâhında fırından yeni çıkmış koca tepsi su böreği"
         width={1280}
-        height={1920}
+        height={1280}
         fetchPriority="high"
         className="ken-burns absolute inset-0 size-full object-cover object-center"
         style={{
